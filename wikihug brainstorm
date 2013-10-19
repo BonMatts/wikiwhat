@@ -1,0 +1,52 @@
+search terms
+
+possible responses from wikipedia api:
+
+-the full article
+
+- redirect
+
+-disambiguation page
+
+
+
+
+{a: one, b: two, {c: three, d: four}, {{{e:five, f: six}, g: eight}, h:nine, j:ten, k: eleven}, {{l:twelve, m: thirteen}, n:fourteen, o:fifteen, p:sixteen} q:seventeen}
+
+def get in hash(search term, hash)
+
+if the value is not a hash && not search term
+	if no next key value
+		go up one level
+	else
+	go to next key value
+elsif key is key == search_term
+ yay grab valuie
+
+else value is a hash
+
+	get in hash(search term,( hash located at key ))
+
+
+end
+
+if hash contains key?
+	yay grab value
+else if value is a hash
+	get in hashthat hash(search term, that hash)
+else (there is not a key that matches or a value that is a hash)
+	go up a level
+
+
+
+def find_key(hash, key)
+	key_found = false;
+	if hash.include_key? key
+		return true
+		else
+		hash.each_pair do |k, v|
+		  key_found |= find_key(v, hash) if v.class == Hash
+		  if key_found
+		  	return true
+		  end
+		end
