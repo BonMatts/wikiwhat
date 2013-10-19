@@ -1,5 +1,8 @@
 require "wikiwhat/version"
 
 module Wikiwhat
-  # Your code goes here...
+  class Page
+    def initialize
+    end
+  end
 end
