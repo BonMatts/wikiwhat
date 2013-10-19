@@ -1,4 +1,7 @@
-# Wikiwhat
+Wikiwhat
+========
+
+A wikipedia gem using the mediawiki API
 
 TODO: Write a gem description
 
