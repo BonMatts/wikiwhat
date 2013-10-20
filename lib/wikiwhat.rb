@@ -1,12 +1,22 @@
 require "wikiwhat/version"
+require 'json'
+require ''
 
-module Wikiwhat
-  class Page
+  class Wikiwhat
     # def initialize(title)
-    #   @call = ApiCall::Call.new(title)
+    #   @request = ApiCall::Call.new(title)
     # end
 
-    # def parse(@call)
-    # end
+    def call(title)
+      @request = ApiCall::Call.new(title)
+  
+      @request = @request.call_api
+      parse(@request)
+    end
+
+
+    def parse(request)
+      @para = Parse::Text.new(request)
+      @para.paragraph
+    end
   end
-end

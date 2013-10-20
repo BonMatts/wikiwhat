@@ -6,10 +6,10 @@ require 'wikiwhat/version'
 Gem::Specification.new do |spec|
   spec.name          = "wikiwhat"
   spec.version       = Wikiwhat::VERSION
-  spec.authors       = ["Bonnie"]
-  spec.email         = ["blmattson@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.authors       = ["Bonnie Mattson, Clare Glinka"]
+  spec.email         = ["blmattson@gmail.com, glinka.cb@gmail.com"]
+  spec.description   = "media wiki api wrapper"
+  spec.summary       = "soooooo coool"
   spec.homepage      = ""
   spec.license       = "MIT"
 
