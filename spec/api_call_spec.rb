@@ -1,12 +1,11 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
-require 'vcr'
 require 'json'
-require 
+require 'rest_client'
+
 require_relative '../lib/api_call'
-require_relative 'vcr_setup.rb'
-require_relative 'einstein_extract_full_text_json.rb'
+require_relative 'testfiles/api_test_einstein'
 
 describe ApiCall::Call do
   context 'User requests inital paragraph of wiki article' do
@@ -26,7 +25,7 @@ describe ApiCall::Call do
 
     describe '#call_api' do
       it 'uses RestClient to make API call' do
-        expect(search.call_api).to eq(  )
+        expect(search.call_api).to eq(testoutput)
       end
     end
   end

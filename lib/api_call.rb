@@ -1,5 +1,6 @@
 require 'open-uri'
-require 'RestClient'
+require 'rest_client'
+require 'json'
 
 module ApiCall
   class Call
@@ -18,7 +19,7 @@ module ApiCall
     end
 
     def call_api
-      
+      JSON.parse(RestClient.get form_string)
     end
   end
 end
