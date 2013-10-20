@@ -10,7 +10,7 @@ gem 'json'
 gem 'vcr'
 
 # Required for VCR
-gem 'webmock'
+gem 'webmock', '~> 1.14.0'
 
 # For making our API calls
 gem 'rest-client'
