@@ -2,11 +2,33 @@ module Parse
 
   # Extract portions of text from Wiki article
   class Text
+    @result =nil
+    def pull_from_hash(hash, key)
+      @hash = hash
+      @key = key
+
+
+      if @hash.include?(@key)
+        @result = @hash[@key]
+      else
+        @hash.each_pair do |k, v|
+          if v.class == Hash
+            pull_from_hash(v, @key) 
+          end
+        end
+      end
+      @result 
+    end
 
     # Returns first paragraph of the Wiki article
     #
     # TODO: refactor to take number of paragraphs as argument
-    def paragraph
+    def paragraph(content)
+      @start = content.split("</p>")[0]
+      @start = @start.split("<p>")[1]
+      return @start
+
+      
     end
 
     # Return the text from the sidebar, if one exists
