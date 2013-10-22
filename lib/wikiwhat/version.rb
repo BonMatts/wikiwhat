@@ -1,3 +1,3 @@
-module Wikiwhat
+class Wikiwhat
   VERSION = "0.0.1"
 end
