@@ -17,7 +17,7 @@ module ApiCall
     # Make a string that is the URL for the API call.
     #
     def form_string
-      @base = "http://en.wikipedia.org/w/api.php?action=#{@action}&prop=#{@prop}&format=json"
+      @base = "http://en.wikipedia.org/w/api.php?action=#{@action}&prop=#{@prop}&format=json&redirects"
       @title = URI::encode(@title)
       @base + '&titles=' + @title
     end
