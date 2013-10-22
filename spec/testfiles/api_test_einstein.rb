@@ -6,6 +6,7 @@ require 'rest_client'
 def testoutput
   JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&titles=Albert%20Einstein")
 end
+<<<<<<< Updated upstream
 def testoutput2
   JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&titles=Cottage%20Lake%2C%20Washington")
 end
@@ -17,4 +18,17 @@ end
 
 def test_hash 
 {"query" => {"pages"=>{"137989"=>{"pageid"=>137989, "ns"=>0, "title"=>"Cottage Lake, Washington", "extract"=> "what" }}}}
+=======
+
+def jsontestoutput
+  RestClient.get "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&titles=Albert%20Einstein"
+end
+
+def testoutput2
+  JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&titles=Albert%20Einstein")
+end
+
+def testhash
+  {"key1" => { "key2" => { "key3"=> "value", "key4"=> "value2", "key3" => "value3"}}}
+>>>>>>> Stashed changes
 end
