@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["blmattson@gmail.com, glinka.cb@gmail.com"]
   spec.description   = "media wiki api wrapper"
   spec.summary       = "soooooo coool"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/kitsunetsuki/Wikiwhat"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
