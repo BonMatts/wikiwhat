@@ -37,6 +37,15 @@ module Parse
       return @start
     end
 
+    # Removes HTML tags from a String
+    #
+    # string - a String that contains HTML tags.
+    #
+    # Returns the string without HTML tags.
+    def only_text(string)
+      no_html_tags = string.gsub(/<\/?.*?>/,'')
+    end
+
     # Return the text from the sidebar, if one exists
     def sidebar
     end
