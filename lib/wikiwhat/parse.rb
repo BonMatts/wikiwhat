@@ -55,7 +55,16 @@ module Parse
     end
 
     # Return all paragraphs under a given heading
-    def header(name)
+    #
+    def find_header(header)
+      # Find the requested header
+      start = @request.index(header)
+      # Find next instance of the tag.
+      end_first_tag = start + @request[start..-1].index("h2") + 3
+      # Find
+      start_next_tag = @request[end_first_tag..-1].index("h2") + end_first_tag - 2
+      # Select substring of requested text.
+      section =  @request[end_first_tag..start_next_tag]
     end
 
     # Returns user-defined number of words before and/or a user-defined search term.
