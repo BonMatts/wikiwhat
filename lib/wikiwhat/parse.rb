@@ -25,16 +25,22 @@ module Parse
   # Extract portions of text from Wiki article
   class Text < Results
     def initialize(request)
+      # NOTE: change request to extract?
       @request = self.pull_from_hash(request, "extract")
     end
 
     # Returns first paragraph of the Wiki article
     #
     # TODO: refactor to take number of paragraphs as argument
-    def paragraph
-      @start = @request.split("</p>")[0]
-      @start = @start.split("<p>")[1]
-      return @start
+    def paragraph(quantity)
+      start = request.split("</p>")
+
+      start.each do |string|
+        string << "</p>"
+      end
+
+      quantity = quantity - 1
+      new_arr = start[0..quantity]
     end
 
     # Removes HTML tags from a String
