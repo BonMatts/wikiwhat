@@ -24,9 +24,12 @@ module Parse
 
   # Extract portions of text from Wiki article
   class Text < Results
-    def initialize(request)
-      # NOTE: change request to extract?
-      @request = self.pull_from_hash(request, "extract")
+    attr_reader :request
+    def initialize(request, prop='extract')
+      @request = self.pull_from_hash(request, prop)
+      if @request.class == Array
+        @request = self.pull_from_hash(@request[0], "*")
+      end
     end
 
     # Returns first paragraph of the Wiki article
@@ -52,12 +55,23 @@ module Parse
       no_html_tags = string.gsub(/<\/?.*?>/,'')
     end
 
+    def wikitext_sections
+      
+    end
+
     # Return the text from the sidebar, if one exists
     def sidebar
+      @sidebar = content_split(0)
+
     end
 
     # Return all refrences
     def refs
+      @content = content_split(1, 2)
+    
+      #add all references to an array. this does not work
+      @refs = @content.match(/<ref>(.*?)<\/ref>/)
+
     end
 
     # Return all paragraphs under a given heading
@@ -72,6 +86,16 @@ module Parse
       # Select substring of requested text.
       section =  @request[end_first_tag..start_next_tag]
     end
+
+
+    def content_split(start, finish=nil)
+      @content = @request.split("'''")
+      if finish == nil
+        return @content[start]
+      else
+        return @content[start..finish].join
+    end 
+
 
     # Returns user-defined number of words before and/or a user-defined search term.
     def search(term, words, options={})

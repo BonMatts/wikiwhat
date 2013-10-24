@@ -21,4 +21,8 @@ class Wikiwhat
     @para = Parse::Text.new(api_return)
     @para.paragraph
   end
+
+  def reference_sidebar
+    raw = ApiCall::Call.new(title, 'revisions&rvprop=content')
+    base = Parse::Text.new(raw)
 end

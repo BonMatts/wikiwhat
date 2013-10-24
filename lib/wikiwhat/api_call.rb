@@ -8,10 +8,10 @@ module ApiCall
 
     # Take argument title and set it as instance variable.
     #
-    def initialize(title)
+    def initialize(title, prop='extracts', action='query')
       @title = title
-      @action = 'query'
-      @prop = 'extracts'
+      @action = action
+      @prop = prop
     end
 
     # Make a string that is the URL for the API call.
