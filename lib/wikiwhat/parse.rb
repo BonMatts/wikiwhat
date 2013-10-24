@@ -24,8 +24,8 @@ module Parse
 
   # Extract portions of text from Wiki article
   class Text < Results
-    def initialize(request)
-      @request = self.pull_from_hash(request, "extract")
+    def initialize(request, prop='extract')
+      @request = self.pull_from_hash(request, prop)
     end
 
     # Returns first paragraph of the Wiki article
@@ -46,8 +46,13 @@ module Parse
       no_html_tags = string.gsub(/<\/?.*?>/,'')
     end
 
+    def wikitext_sections
+      @sidebar = @request.sub(/^(.*?)'''/)
+    end
+
     # Return the text from the sidebar, if one exists
     def sidebar
+
     end
 
     # Return all refrences
