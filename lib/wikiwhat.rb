@@ -11,14 +11,16 @@ class Wikiwhat
   # title - the title of the wikipedia article as a string
   #
   # returns first paragraph of article
-  def self.call(title)
+  def self.text(title)
     request = ApiCall::Call.new(title)
     api_return = request.call_api
-    parse(api_return)
+    # parse(api_return)
+    @para = Parse::Text.new(api_return)
+    @para.find_header
   end
 
   def self.parse(api_return)
-    @para = Parse::Text.new(api_return)
+    
     @para.paragraph
   end
 
