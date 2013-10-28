@@ -3,30 +3,97 @@ require 'json'
 require 'wikiwhat/parse'
 require 'wikiwhat/api_call'
 
-class Wikiwhat
-  # Creates a new ApiCall::Call instance,
-  # Calls ApiCall:Call #call_api
-  # calls parse (see self.parse comments)
-  #
-  # title - the title of the wikipedia article as a string
-  #
-  # returns first paragraph of article
-  def self.text(title)
-    request = ApiCall::Call.new(title)
-    api_return = request.call_api
-    # parse(api_return)
-    @para = Parse::Text.new(api_return)
-    @para.find_header
-  end
+module Wikiwhat
 
-  def self.parse(api_return)
-    
-    @para.paragraph
-  end
+  class Page
+    # Include module for calling Wikipedia API.
+    include Api
+    # Include modeule for parsing Wikipedia content from Wikipedia API.
+    include Parse
 
-  def self.references(title)
-    raw = (ApiCall::Call.new(title, 'revisions&rvprop=content')).call_api
-    base = Parse::Text.new(raw)
-    base.refs
+    # Set title of article and type of information requested.
+    #
+    # title       - the title of the requested article as a String
+    # img_list    - True if desired output is a list of all images on the page.
+    # header      - the desired section header as a String.
+    # refs        - True if desired output is a list of all references on the page.
+    # sidebar_img - True if desired output is the image in the sidebar
+    # paragraphs  - the number of paragraphs from the article as an Interger
+    # sidebar     - True if desired output is the contents of the sidebar.
+    #
+    # Takes options hash and sets instance variables, then calls appropriate method.
+    def initialize(title, options={})
+      @title = title
+
+      run(options)
+    end
+
+    # Iterates over the options hash.
+    #
+    # hash - options hash
+    #
+    # Runs the appropriate method based on the options hash.
+    def run(hash)
+      hash.each do |key, value|
+        if key == :img_list
+          @img_list = value
+          find_image_list
+        elsif key == :header
+          @head = value
+          find_header
+        elsif key == :refs
+          @refs = value
+          find_refs
+        elsif key == :sidebar_img
+          @sidebar_img = value
+          find_sidebar_img
+        elsif key == :paragraphs
+          @paras = paragraphs || 1
+          find_paragraphs
+        elsif key == :sidebar
+          @sidebar = value
+          find_sidebar
+        end
+      end
+    end
+
+
+    def find_paragraphs
+      find_para = Call.new(@title, prop => "extracts")
+      api_contents = find_para.call_api
+
+      para = Text.new(@title)
+      @paragraphs = para.paragraph(@paras)
+    end
+
+    def find_image_list
+      find_img_list = Call.new(@title, prop => "", image_list => true)
+      api_contents = find_para.call_api
+      img_list = Media.new(api_contents)
+      @image_list = img_list.list_images
+    end
+
+    def find_header
+      find_head = Call.new(@title, prop => "extracts")
+      api_contents = find_para.call_api
+
+      head_text = Text.new(api_contents)
+      @header = head_text.find_header(@head)
+    end
+
+    def find_refs
+      find_ref = Call.new(@title, prop => "revisions", rvprop => true)
+      api_contents = find_para.call_api
+    end
+
+    def find_sidebar_img
+      find_ref = Call.new(@title, prop => "revisions", rvprop => true)
+      api_contents = find_para.call_api
+    end
+
+    def find_sidebar
+      find_ref = Call.new(@title, prop => "revisions", rvprop => true)
+      api_contents = find_para.call_api
+    end
   end
 end

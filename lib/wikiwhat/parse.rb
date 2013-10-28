@@ -24,9 +24,9 @@ module Parse
 
   # Extract portions of text from Wiki article
   class Text < Results
-    attr_reader :request
-    def initialize(request, prop='extract')
-      @request = self.pull_from_hash(request, prop)
+    attr_reader :api_return
+    def initialize(api_return, prop='extract')
+      @request = self.pull_from_hash(api_return, prop)
       if @request.class == Array
         @request = self.pull_from_hash(@request[0], "*")
       end
@@ -39,7 +39,7 @@ module Parse
     #
     def paragraph(quantity)
       # Break the article into individual paragraphs and store in an array.
-      start = request.split("</p>")
+      start = @request.split("</p>")
 
       # Re-add the closing paragraph HTML tags.
       start.each do |string|
@@ -67,8 +67,9 @@ module Parse
       no_html_tags = string.gsub(/<\/?.*?>/,'')
     end
 
-    def wikitext_sections
-    end
+    # Return the text from the sidebar, if one exists
+    def sidebar
+      @sidebar = content_split(0)
 
     # Return the image from the sidebar, if one exists
     def sidebar_image
@@ -98,7 +99,7 @@ module Parse
       start_next_tag = @request[end_first_tag..-1].index("h2") +
         end_first_tag - 2
       # Select substring of requested text.
-      section =  @request[end_first_tag..start_next_tag]
+      @request[end_first_tag..start_next_tag]
     end
 
     # splits the content into side bar and everything else. 
@@ -122,13 +123,13 @@ module Parse
   end
 
   class Media < Results
-    def initialize
+    def initialize(api_return)
+      @api_return = api_return
     end
 
     def list_images
       # Call API for initial list of images
-      initial_list = JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query&generator=images&titles=Albert%20Einstein&format=json")
-      isolated_list = pull_from_hash(initial_list, "pages")
+      isolated_list = pull_from_hash(@api_return, "pages")
 
       # Parse JSON object for list of image titles
       image_title_array = []
@@ -140,7 +141,8 @@ module Parse
       image_url_call_array = []
       image_title_array.each do |title|
         title = URI::encode(title)
-        image_url_call_array << JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query&titles=#{title}&prop=imageinfo&iiprop=url&format=json")
+        individual_img_call = Api::Call.new(title, prop => "imageinfo", iiprop => true)
+        image_url_call_array << individual_img_call.call_api
       end
 
       # Pull array containing URL out from JSON object

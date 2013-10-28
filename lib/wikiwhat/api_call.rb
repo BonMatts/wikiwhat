@@ -2,38 +2,31 @@ require 'open-uri'
 require 'rest_client'
 require 'json'
 
-module ApiCall
+module Api
   class Call
     attr_accessor :title
 
     # Initialize an instance of Call
     #
-    # title  - the title of the desired Wikipedia API as a String
-    # prop   -
-    # action -
+    # title      - the title of the desired Wikipedia API as a String
+    # prop       - the type of content as a String
+    # rvprop     - True or False
+    # image_list - True or False
+    # iiprop     - True or False
     #
     # Set instance variables.
-    def initialize(title, prop='extracts', action='query', options={})
+    def initialize(title, options={})
       @title = URI::encode(title)
-      @action = action
       @prop = prop
+      rvprop ? @rvprop = "&rvprop=content" : @rvprop = ''
       img_list ? @img_list = "&generator=images" : @img_list = ''
+      iiprop ? @iiprop = "&iiprop=url" : @iiprop = ''
     end
 
     # Make a string that is the URL for the API call for text-based requests.
     #
     def form_string
-      @base = "http://en.wikipedia.org/w/api.php?action=#{@action}&prop=#{@prop}&titles=#{@title}&format=json&redirects#{@img_list}"
-    end
-
-    # Make a string that is the URL for the API call for a list of images.
-    #
-    def form_string_img_list
-      @base = "http://en.wikipedia.org/w/api.php?action=query&generator=images&titles=#{@title}&format=json"
-    end
-
-    def 
-      
+      @base = "http://en.wikipedia.org/w/api.php?action=query&prop=#{@prop}&titles=#{@title}&format=json&redirects#{@img_list}#{@rvprop}#{@iiprop}"
     end
 
     # Call the API and parse the returning JSON object.
