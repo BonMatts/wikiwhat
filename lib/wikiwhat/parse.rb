@@ -59,21 +59,17 @@ module Parse
       
     end
 
-    # Return the text from the sidebar, if one exists
-    def sidebar
-      @sidebar = content_split(0)
-
+    # Return the image from the sidebar, if one exists
+    def sidebar_image
+      @sidebar_image = content_split(0)[/(?<= image = )\S*/].chomp
     end
 
     # Return all refrences as an array
     def refs
       @content = content_split(1, 2)
     
-      #add all references to an array
+      #add all references to an array. still in wiki markup
       @refs = @content.scan(/<ref>(.*?)<\/ref>/)
-      # @refs.each do |ref|
-        
-      # end
      @refs
 
     end
@@ -91,7 +87,10 @@ module Parse
       section =  @request[end_first_tag..start_next_tag]
     end
 
-
+    # splits the content into side bar and everything else. 
+    # this method is for Parsing methods that use the raw markup from the revisions call.
+    # specify start as 0 for sidebar content, for everything else specify 1 ..2
+    # TODO:split the content from the catagory info
     def content_split(start, finish=nil)
       @content = @request.split("'''")
       if finish == nil
