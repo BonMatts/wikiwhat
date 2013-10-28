@@ -4,7 +4,6 @@ require 'wikiwhat/parse'
 require 'wikiwhat/api_call'
 
 module Wikiwhat
-
   class Page
     # Include module for calling Wikipedia API.
     include Api
@@ -24,7 +23,12 @@ module Wikiwhat
     # Takes options hash and sets instance variables, then calls appropriate method.
     def initialize(title, options={})
       @title = title
-
+      @img_list
+      @head
+      @refs
+      @sidebar_img
+      @paras
+      @sidebar
       run(options)
     end
 
@@ -62,7 +66,7 @@ module Wikiwhat
       find_para = Call.new(@title, prop => "extracts")
       api_contents = find_para.call_api
 
-      para = Text.new(@title)
+      para = Text.new(api_contents)
       @paragraphs = para.paragraph(@paras)
     end
 
@@ -84,16 +88,22 @@ module Wikiwhat
     def find_refs
       find_ref = Call.new(@title, prop => "revisions", rvprop => true)
       api_contents = find_para.call_api
+
+      f_ref = Text.new(api_contents)
+      @refs = f_ref.refs
     end
 
     def find_sidebar_img
       find_ref = Call.new(@title, prop => "revisions", rvprop => true)
       api_contents = find_para.call_api
+
+      side_img_name = Text.new(api_contents)
+      @sidebar_img = side_img_name.sidebar_img
     end
 
-    def find_sidebar
-      find_ref = Call.new(@title, prop => "revisions", rvprop => true)
-      api_contents = find_para.call_api
-    end
+    # def find_sidebar
+    #   find_ref = Call.new(@title, prop => "revisions", rvprop => true)
+    #   api_contents = find_para.call_api
+    # end
   end
 end

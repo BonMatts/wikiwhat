@@ -1,5 +1,4 @@
 module Parse
-
   class Results
     def initialize
       @result = nil
@@ -68,22 +67,25 @@ module Parse
     end
 
     # Return the text from the sidebar, if one exists
-    def sidebar
-      @sidebar = content_split(0)
+    # def sidebar
+    #   @sidebar = content_split(0)
+    # end
 
     # Return the image from the sidebar, if one exists
     def sidebar_image
-      @sidebar_image = content_split(0)[/(?<= image = )\S*/].chomp
+      img_name = content_split(0)[/(?<= image = )\S*/].chomp
+      img_name_call = Api::Call.new(img_name, prop => "imageinfo", iiprop => true)
+      img_name_2 = img_name_call.call_api
+      img_array = pull_from_hash(img_name_2, "imageinfo")
+      img_array[0]["url"]
     end
 
     # Return all refrences as an array
     def refs
       @content = content_split(1, 2)
-    
-      #add all references to an array. still in wiki markup
-      @refs = @content.scan(/<ref>(.*?)<\/ref>/)
-     @refs
 
+      #add all references to an array. still in wiki markup
+      @content.scan(/<ref>(.*?)<\/ref>/)
     end
 
     # Return all paragraphs under a given heading
@@ -102,7 +104,7 @@ module Parse
       @request[end_first_tag..start_next_tag]
     end
 
-    # splits the content into side bar and everything else. 
+    # splits the content into side bar and everything else.
     # this method is for Parsing methods that use the raw markup from the revisions call.
     # specify start as 0 for sidebar content, for everything else specify 1 ..2
     # TODO:split the content from the catagory info
