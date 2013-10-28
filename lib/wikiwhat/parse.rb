@@ -65,12 +65,16 @@ module Parse
 
     end
 
-    # Return all refrences
+    # Return all refrences as an array
     def refs
       @content = content_split(1, 2)
     
-      #add all references to an array. this does not work
-      @refs = @content.match(/<ref>(.*?)<\/ref>/)
+      #add all references to an array
+      @refs = @content.scan(/<ref>(.*?)<\/ref>/)
+      # @refs.each do |ref|
+        
+      # end
+     @refs
 
     end
 
@@ -94,6 +98,7 @@ module Parse
         return @content[start]
       else
         return @content[start..finish].join
+      end
     end 
 
 
