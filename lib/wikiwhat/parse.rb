@@ -22,13 +22,6 @@ module Parse
     end
   end
 
-  def get_img_object
-    @request = self.pull_from_hash(request, prop)
-    if @request.class == Array
-      @request = self.pull_from_hash(@request[0], "")
-    end
-  end
-
   # Extract portions of text from Wiki article
   class Text < Results
     attr_reader :request
@@ -44,7 +37,7 @@ module Parse
     # quantity - the Number of paragraphs to be returned starting from the top
     #            of the article. Defaults is to get the first paragraph.
     #
-    def paragraph(quantity = 1)
+    def paragraph(quantity)
       # Break the article into individual paragraphs and store in an array.
       start = request.split("</p>")
 
@@ -77,18 +70,18 @@ module Parse
     def wikitext_sections
     end
 
-    # Return the text from the sidebar, if one exists
-    def sidebar
-      @sidebar = content_split(0)
-
+    # Return the image from the sidebar, if one exists
+    def sidebar_image
+      @sidebar_image = content_split(0)[/(?<= image = )\S*/].chomp
     end
 
-    # Return all refrences
+    # Return all refrences as an array
     def refs
       @content = content_split(1, 2)
-
-      #add all references to an array. this does not work
-      @refs = @content.match(/<ref>(.*?)<\/ref>/)
+    
+      #add all references to an array. still in wiki markup
+      @refs = @content.scan(/<ref>(.*?)<\/ref>/)
+     @refs
 
     end
 
@@ -108,7 +101,10 @@ module Parse
       section =  @request[end_first_tag..start_next_tag]
     end
 
-
+    # splits the content into side bar and everything else. 
+    # this method is for Parsing methods that use the raw markup from the revisions call.
+    # specify start as 0 for sidebar content, for everything else specify 1 ..2
+    # TODO:split the content from the catagory info
     def content_split(start, finish=nil)
       @content = @request.split("'''")
       if finish == nil

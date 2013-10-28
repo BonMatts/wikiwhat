@@ -12,8 +12,11 @@ describe ApiCall::Call do
     let(:search) { ApiCall::Call.new('Albert Einstein') }
 
     describe '.initialize' do
-      it 'sets the title variable' do
+      context 'User does not specify prop or query'
+        it 'sets the title variable, uses default prop and action values' do
+        
         expect(search.title).to eq('Albert Einstein')
+
       end
     end
 
