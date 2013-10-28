@@ -49,11 +49,12 @@ module Parse
       # than exist.
       #
       # Return the correct number of paragraphs assigned to new_arr
-      if start.length <= quantity
-        quantity = quantity - 1
+      if start.length < quantity
+        quantity = start.length - 1
         new_arr = start[0..quantity]
       else
-        new_arr = start
+        quantity = quantity - 1
+        new_arr = start[0..quantity]
       end
     end
 
@@ -74,7 +75,7 @@ module Parse
     # Return the image from the sidebar, if one exists
     def sidebar_image
       img_name = content_split(0)[/(?<= image = )\S*/].chomp
-      img_name_call = Api::Call.new(img_name, prop => "imageinfo", iiprop => true)
+      img_name_call = Api::Call.new(img_name, :prop => "imageinfo", :iiprop => true)
       img_name_2 = img_name_call.call_api
       img_array = pull_from_hash(img_name_2, "imageinfo")
       img_array[0]["url"]
@@ -120,8 +121,8 @@ module Parse
 
     # Returns user-defined number of words before and/or
     # a user-defined search term.
-    def search(term, words, options={})
-    end
+    # def search(term, words, options={})
+    # end
   end
 
   class Media < Results
@@ -143,7 +144,7 @@ module Parse
       image_url_call_array = []
       image_title_array.each do |title|
         title = URI::encode(title)
-        individual_img_call = Api::Call.new(title, prop => "imageinfo", iiprop => true)
+        individual_img_call = Api::Call.new(title, :prop => "imageinfo", :iiprop => true)
         image_url_call_array << individual_img_call.call_api
       end
 
