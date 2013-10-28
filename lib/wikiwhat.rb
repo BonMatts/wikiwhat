@@ -3,7 +3,7 @@ require 'json'
 require 'wikiwhat/parse'
 require 'wikiwhat/api_call'
 
-module Wikiwhat
+class Wikiwhat
   class Page
     # Include module for calling Wikipedia API.
     include Api
@@ -23,12 +23,12 @@ module Wikiwhat
     # Takes options hash and sets instance variables, then calls appropriate method.
     def initialize(title, options={})
       @title = title
-      @img_list
-      @head
-      @refs
-      @sidebar_img
-      @paras
-      @sidebar
+      # @img_list
+      # @head
+      # @refs
+      # @sidebar_img
+      # @paras
+      # @sidebar
       run(options)
     end
 
@@ -52,7 +52,7 @@ module Wikiwhat
           @sidebar_img = value
           find_sidebar_img
         elsif key == :paragraphs
-          @paras = paragraphs || 1
+          @paras = value
           find_paragraphs
         elsif key == :sidebar
           @sidebar = value
@@ -63,23 +63,23 @@ module Wikiwhat
 
 
     def find_paragraphs
-      find_para = Call.new(@title, prop => "extracts")
+      find_para = Call.new(@title, :prop => "extracts")
       api_contents = find_para.call_api
 
       para = Text.new(api_contents)
-      @paragraphs = para.paragraph(@paras)
+      @paragraphs = para.paragraph(@paras || 1)
     end
 
     def find_image_list
-      find_img_list = Call.new(@title, prop => "", image_list => true)
-      api_contents = find_para.call_api
+      find_img_list = Call.new(@title, :image_list => true)
+      api_contents = find_img_list.call_api
       img_list = Media.new(api_contents)
       @image_list = img_list.list_images
     end
 
     def find_header
       find_head = Call.new(@title, prop => "extracts")
-      api_contents = find_para.call_api
+      api_contents = find_head.call_api
 
       head_text = Text.new(api_contents)
       @header = head_text.find_header(@head)
@@ -87,7 +87,7 @@ module Wikiwhat
 
     def find_refs
       find_ref = Call.new(@title, prop => "revisions", rvprop => true)
-      api_contents = find_para.call_api
+      api_contents = find_ref.call_api
 
       f_ref = Text.new(api_contents)
       @refs = f_ref.refs
@@ -95,7 +95,7 @@ module Wikiwhat
 
     def find_sidebar_img
       find_ref = Call.new(@title, prop => "revisions", rvprop => true)
-      api_contents = find_para.call_api
+      api_contents = find_ref.call_api
 
       side_img_name = Text.new(api_contents)
       @sidebar_img = side_img_name.sidebar_img
