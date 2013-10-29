@@ -4,7 +4,7 @@ require 'json'
 
 module Api
   class Call
-    attr_accessor :title
+    attr_accessor :title, :prop
 
     # Initialize an instance of Call
     #
@@ -17,10 +17,10 @@ module Api
     # Set instance variables.
     def initialize(title, options={})
       @title = URI::encode(title)
-      @prop = prop
-      rvprop ? @rvprop = "&rvprop=content" : @rvprop = ''
-      img_list ? @img_list = "&generator=images" : @img_list = ''
-      iiprop ? @iiprop = "&iiprop=url" : @iiprop = ''
+      options[:prop] ? @prop = options[:prop] : @prop = ''
+      options[:rvprop] ? @rvprop = "&rvprop=content" : @rvprop = ''
+      options[:img_list] ? @img_list = "&generator=images" : @img_list = ''
+      options[:iiprop] ? @iiprop = "&iiprop=url" : @iiprop = ''
     end
 
     # Make a string that is the URL for the API call for text-based requests.

@@ -1,0 +1,97 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&redirects&titles=Kel%20Mitchell
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 28 Oct 2013 23:51:45 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - private
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '2006'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Cache:
+      - MISS from cp1002.eqiad.wmnet
+      - MISS from cp1010.eqiad.wmnet
+      X-Cache-Lookup:
+      - MISS from cp1002.eqiad.wmnet:3128
+      - MISS from cp1010.eqiad.wmnet:80
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA4VXa2/bOhL9K1xfYNsCifPoI22vYSDPPuK0RWxsd4F8oaWx
+        xTVF6pKUHe3F/vd7hpQsJ2l7C7R2JXIeZ86cGf85+KMm1wze/zmo5JI8f3nz
+        5ujtyXH3SOWD9+nJ3sDg/eHeIKigafB+cE1a3KiQFaT1YG9A98HJLODFqBqP
+        5mN+/dkW0ilxqzLaHh0dzMfi+dw6I07rZe2DOH69J47enbx9IZQXEo9LcirD
+        F5izbk9ktqRcSbMncmkywpOy9iqLTzZOBX4iTS4qZ/Ma74fiI7GpOcH4ytiN
+        EQvrRIFHG+tWQsKLcLSstXQikzhUUjknJ+xChILEF5WtSNucrBF+RQg7hdAI
+        j8DIi5Ean2otZoUMowM13oumK+sAQCM1m+Hkr1U51yRg5IlRQGFLNnNNBnn+
+        U5bV73ynt+YsriLQy1yoZGChdBnT7Fx3scHMB2tzcVa7JblkAjf5ztoy8ojn
+        ouaTraUL5Q014t8XSN4Fi4Bg4sYC60yFpjUAR4+NfJZN/Kv6jPi235r5rnQu
+        PjhlcnJ+ODqoxnfmzoyK4/FpFpRZ8kHiEPEEz6sx6sSOEgqzwpaVhxmpvRU+
+        SOdom32P/A8gEwsHOI/evXtzVx8fHr08Pjw8jBhswLdUbrw8EaX8L3hQ2qDg
+        pVJZqB3ticjn/IcwbgoF2JaONsLWgTGwJkLBJUrwI6jo/REnhvhGIq9tykZW
+        FUlOJ9glIR/HeSENqpQHJ9gkDEyVj2ROnzGzjQqFmCkZcZpJdIYUN3bjGuQn
+        FoirteDZBLucBlqT+CjdGiX2hd2kWsJn00fBzoWvCD2kRdjY/QoVfBTMuUWT
+        GTFdEbXBxJwagOooZbUgyRDmT5O5G0zlHESQsXgzQs2WBH4AsLtBywzU/2sd
+        vMq3iK7JsD2fsn7Iir2tgHCfr3Erf8hOKUrQb7+UxhDHFBVBy2ZRa5HbpTAA
+        DxDun3EJW1ZlBa44Ms96DvdEO9dqAd1Ibs7UUtzi/oVdtg2irVnG4CFyBhIX
+        YukiF5h/qDR/vhyK0zxXzDipNapWtNiVMmfytzVhXeuCwq1X4lqaBoCxgkWx
+        E5yx7Vh2BVsesWxMJElkuK6XSwY5s1pTare11BSGPXCZ3S8sqBXJfhF9vnxz
+        2PPsCrg5Cwqh9X5PbQcCCS3jHdZQa3QTe8CTRFGG4pPheF/vVifpIC7coBSN
+        mOIh5GDbyFvt+2qiOOKjj+C60VJ8czKERFsVzZ/01ndk4exyhroZ9EBfs5lc
+        UXRzji+Js1NId0cwG1svgwEVOKJM16gC7n1ETk3uFIqR+o6dsyo23ImNuKGI
+        dM9c5H0jHcQB4b0VrTwjrjhkMJMY/n4m8f9ymtfIaov8VR0dIZGkMh0xugxb
+        9dUk8zgNQCR+nRB5uwP4blejl8UFBWdV2J9Lj4cwB1KkMJiFPoZwulhI5fxu
+        qhNZG1S/7GZadC6Z1TGhQEbMG+DqtPUgoIpKzVNiN+huVENFc8zLCW0UHE6I
+        mxKiMCFNdDcQk4bHBopyG3X8DBJr60pMv/8L0x5nIB0Bc6ZENeBGYjIdpDzi
+        RgDkQ8A/GduOIWTwW2nlC4SwtpnE15DgJwfaQjUF0kOjxxju7xViONV0r/xQ
+        nNeI3ATuzS2kvIeIqImI8cOrZ2nkhyCzVbckTNEZ/0hIscqkdnMKoglVkbwJ
+        8QzkTSQCVLRLRwZvfDbO93Y1+HY2xbKQ+9RtrDx1MvSBLGZRovHHB7ohljVL
+        w454YB84h1+NPsAnQmLtzgprtTh+9Rtz4ws65TOCoqanMVutkzy1Hc5jiFU9
+        x6D/opZFEBO1po6qrGgCPBYgQYgzETLHnP/JYIbiMDWeaPmmsFjPMkhyu9s4
+        mNtdxQK/F42tzZL/V0jT6xF6l/SCM2ZKHL/eUTgAHGvZNwVOJVE9OhLntlQr
+        +T8Sl/eVTYLjMS1d2tnaNHan+G5ILdfgQYW20S2gRwQYehInEUJVODTddiH4
+        ASId9NiAviVya4E5Q/1OtM1lA8qUaCsV1wYxa8BvicleVsGa/e0xLppX96JB
+        vl7UJijNGSsncrXGSkdt3QDTRR25F3h5DKqk1OQZWg9kLKAzLB/dTNwHy3JZ
+        gwE814BK7dK2hs2BSzhpsKTvQL+lORvxcYMBZICgQbem/eW6cTIy2VGXGFrg
+        szS1hMZC01ClY87VcfmcOPVYfCZE3UKPgGjNpDsvHBxAZ3bgvIIA2yVuFk0H
+        ZvFy/DUqft8nkDw8TTewB2dPb0wBke7P1Xo80mr8nLfLF5CP71xnzANMX3HT
+        gCk4DjUZ+RIzefwcEvmpLONa1K5HjPi0tBg97a7b/2p6MTpI156skO/jLneq
+        53XJrBkdIAQE0wZyEgOhZ47ij4ELDDH/MIYJec+GGN0V/Z1jZsHT9RdlxkTg
+        H3WrR/7fRf9o4VNEgKYG5XcG5cNIdt12m6i4GZ4Or4azobgsM+INeovULQaQ
+        MrxUGfI/DvPRTP6bML9RzjuuTaIdiPTD+P7DEuND/JG4jeIXWPXn01SYUMCX
+        W6v1bqEOmDag1C0tsIy2vDve/hy6vEcGqfXNqnvVUe3rYqHiYr6hObYl2snq
+        AZhonSuZ0dza1c+OtOL3ybA7wszE4gzmyiB5OfiFYWBcwfYvTsw2ceP9yYln
+        cQpi6MezwGxWz2kXnMH/8ecv5HQIXn8QAAA=
+    http_version: 
+  recorded_at: Mon, 28 Oct 2013 23:51:46 GMT
+recorded_with: VCR 2.6.0
