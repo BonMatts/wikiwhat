@@ -117,23 +117,19 @@ module Parse
         return @content[start..finish].join
       end
     end
-
-
-    # Returns user-defined number of words before and/or
-    # a user-defined search term.
-    # def search(term, words, options={})
-    # end
   end
 
   class Media < Results
-    def initialize(api_return)
-      @api_return = api_return
+    attr_reader :api_return
+    def initialize(api_return, prop)
+      @request = self.pull_from_hash(api_return, prop)
     end
 
+    # Return a hash containing an array of urls and an array of image titles.
+    #
     def list_images
       # Call API for initial list of images
-      isolated_list = pull_from_hash(@api_return, "pages")
-
+      isolated_list = @request
       # Parse JSON object for list of image titles
       image_title_array = []
       isolated_list.each do |key, value|
@@ -141,22 +137,27 @@ module Parse
       end
 
       # Make API call for individual image links
-      image_url_call_array = []
+      img_url_call_array = []
       image_title_array.each do |title|
-        title = URI::encode(title)
         individual_img_call = Api::Call.new(title, :prop => "imageinfo", :iiprop => true)
-        image_url_call_array << individual_img_call.call_api
+        img_url_call_array << individual_img_call.call_api
       end
 
-      # Pull array containing URL out from JSON object
-      almost_url = []
-      image_url_call_array.each do |object|
-        almost_url << pull_from_hash(object, "imageinfo")
+      # Pull pages object containing imageinfo array out from JSON object
+      imageinfo_array = []
+      img_url_call_array.each do |object|
+        imageinfo_array << pull_from_hash(object, "pages")
       end
 
-      # Pull each URL and palce in an array
+      # Pull imageinfo array out of nested hash
+      info_array = []
+      imageinfo_array.each do |object|
+        info_array << pull_from_hash(object, "imageinfo")
+      end
+
+      # Pull each URL and place in an array
       url_array = []
-      almost_url.each do |array|
+      info_array.each do |array|
         url_array << array[0]["url"]
       end
 
