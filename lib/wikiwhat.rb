@@ -78,7 +78,7 @@ class Wikiwhat
     end
 
     def find_header
-      find_head = Call.new(@title, prop => "extracts")
+      find_head = Call.new(@title, :prop => "extracts")
       api_contents = find_head.call_api
 
       head_text = Text.new(api_contents)
@@ -86,18 +86,18 @@ class Wikiwhat
     end
 
     def find_refs
-      find_ref = Call.new(@title, prop => "revisions", rvprop => true)
+      find_ref = Call.new(@title, :prop => "revisions", :rvprop => true)
       api_contents = find_ref.call_api
 
-      f_ref = Text.new(api_contents)
+      f_ref = Text.new(api_contents, prop = '')
       @refs = f_ref.refs
     end
 
     def find_sidebar_img
-      find_ref = Call.new(@title, prop => "revisions", rvprop => true)
+      find_ref = Call.new(@title, :prop => "revisions", :rvprop => true)
       api_contents = find_ref.call_api
 
-      side_img_name = Text.new(api_contents)
+      side_img_name = Text.new(api_contents, prop = '')
       @sidebar_img = side_img_name.sidebar_img
     end
 
