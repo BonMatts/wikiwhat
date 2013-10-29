@@ -71,9 +71,9 @@ class Wikiwhat
     end
 
     def find_image_list
-      find_img_list = Call.new(@title, :image_list => true)
+      find_img_list = Call.new(@title, :img_list => true)
       api_contents = find_img_list.call_api
-      img_list = Media.new(api_contents)
+      img_list = Media.new(api_contents, 'pages')
       @image_list = img_list.list_images
     end
 
