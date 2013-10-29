@@ -4,7 +4,7 @@ require 'json'
 
 module Api
   class Call
-    attr_reader :title, :prop, :rvprop
+    attr_accessor :title
 
     # Initialize an instance of Call
     #
@@ -17,20 +17,16 @@ module Api
     # Set instance variables.
     def initialize(title, options={})
       @title = URI::encode(title)
-<<<<<<< HEAD
-      options[:prop] ? @prop = options[:prop] : @prop = ''
-=======
-      options[:prop] ? @prop = "&prop=#{options[:prop]}" : ''
->>>>>>> 769314496aa4c8b2014531353437efdc8ff863be
-      options[:rvprop] ? @rvprop = "&rvprop=content" : @rvprop = ''
-      options[:img_list] ? @img_list = "&generator=images" : @img_list = ''
-      options[:iiprop] ? @iiprop = "&iiprop=url" : @iiprop = ''
+      @prop = prop
+      rvprop ? @rvprop = "&rvprop=content" : @rvprop = ''
+      img_list ? @img_list = "&generator=images" : @img_list = ''
+      iiprop ? @iiprop = "&iiprop=url" : @iiprop = ''
     end
 
     # Make a string that is the URL for the API call for text-based requests.
     #
     def form_string
-      @base = "http://en.wikipedia.org/w/api.php?action=query#{@prop}&titles=#{@title}&format=json&redirects#{@img_list}#{@rvprop}#{@iiprop}"
+      @base = "http://en.wikipedia.org/w/api.php?action=query&prop=#{@prop}&titles=#{@title}&format=json&redirects#{@img_list}#{@rvprop}#{@iiprop}"
     end
 
     # Call the API and parse the returning JSON object.
