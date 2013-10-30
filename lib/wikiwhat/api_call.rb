@@ -4,7 +4,7 @@ require 'json'
 
 module Api
   class Call
-    attr_reader :title, :prop, :rvprop
+    attr_reader :title, :prop, :rvprop, :img_list, :iiprop
 
     # Initialize an instance of Call
     #

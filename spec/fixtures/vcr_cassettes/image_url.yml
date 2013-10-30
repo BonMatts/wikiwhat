@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&generator=images&redirects&titles=Albert%20Einstien
+    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&iiprop=url&prop=imageinfo&redirects&titles=File:Albert%20Einstein's%20exam%20of%20maturity%20grades%20(color2).jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 30 Oct 2013 02:28:35 GMT
+      - Wed, 30 Oct 2013 02:34:58 GMT
       Server:
       - Apache
       X-Content-Type-Options:
@@ -33,27 +33,26 @@ http_interactions:
       Content-Encoding:
       - gzip
       Content-Length:
-      - '287'
+      - '247'
       Content-Type:
       - application/json; charset=utf-8
       X-Cache:
-      - MISS from cp1001.eqiad.wmnet
-      - MISS from cp1003.eqiad.wmnet
+      - MISS from cp1002.eqiad.wmnet
+      - MISS from cp1018.eqiad.wmnet
       X-Cache-Lookup:
-      - MISS from cp1001.eqiad.wmnet:3128
-      - MISS from cp1003.eqiad.wmnet:80
+      - MISS from cp1002.eqiad.wmnet:3128
+      - MISS from cp1018.eqiad.wmnet:80
       Connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA5XSUUvDMBAA4L9y5MUO2rK0s2v3JqL45H/IujM9SZOapMM5
-        999NlSFICzEP4SC5745LzuxtRHvKWqM96RHZ7syoFxLdFEnqfw/Ytqw+78nT
-        B+rsgbTzSDp/HSS7XNIfZsoZrskZn3Yd4iplnryajEdSuOMNbwBbRYNDGIwL
-        5hG/pZT15BxpGa6yoGbFknGn9mg9XPu4cYDvogfzAr3woyV/AmnFAR0krVHG
-        Fqv5AmVkAUiezR7VKh/0jLKJVZ5QHOYbuY0lhAMBbUdqAaqiIQ++QwjvNY3N
-        dxYREl7XS6PaxsISbS90buQMUsciQ2e8Ad4U6/lumn9DfB7i61jJkdTT58Kg
-        lZvcHf9qYX0BT7lwQVEDAAA=
+        H4sIAAAAAAAAA42Q0UrEMBBFfyUMFBV2G6ygu33zQX9CJMR22h1NMjFJ0aXs
+        v5vQLbjgg/MwzJ0Lcw8zw+eE4QjtDF6PGMuwvS3d5fl+A4mSQWjhmQy2j+YN
+        QxJP5GJCcldR4Le2ggdhdZoCpaMYg+4xiuuODYfmpn73I2zAUozkxnwnC7I5
+        KaDnSIlLNsSDDtivFrmBoX2ZYQomm4eUfCvl5A3rvv6iD7LYk645jLIoX5Ts
+        2Fp2UXayu5MLp1o5q+YhqkKqeFArqVpIVdXsFtaq2Z9p87oL5BOxu0A4Z/zB
+        IH+953+xFw86vZ5y/QBCWAGXjAEAAA==
     http_version: 
-  recorded_at: Wed, 30 Oct 2013 02:28:35 GMT
+  recorded_at: Wed, 30 Oct 2013 02:34:58 GMT
 recorded_with: VCR 2.6.0
