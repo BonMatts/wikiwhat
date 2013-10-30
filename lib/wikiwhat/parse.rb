@@ -74,11 +74,11 @@ module Parse
 
     # Return the image from the sidebar, if one exists
     def sidebar_image
-binding.pry
-      img_name = content_split(0)[/(?<= image = )\S*/]
-      img_name = img_name[0..-2]
-      img_name_call = Api::Call.new(img_name, :prop => "imageinfo", :iiprop => true)
-      img_name_2 = img_name_call.call_api
+      img_name = content_split(0)[/(image\s* =\s*).*?(g|f)/]
+      image_name = img_name.split("= ")[1]
+      img_name_call = Api::Call.new('File:'+image_name, :prop => "imageinfo", :iiprop => true)
+      get_url = img_name_call.call_api
+      img_name_2 = pull_from_hash(get_url, "pages")
       img_array = pull_from_hash(img_name_2, "imageinfo")
       img_array[0]["url"]
     end
