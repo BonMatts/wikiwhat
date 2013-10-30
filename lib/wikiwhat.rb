@@ -10,6 +10,8 @@ class Wikiwhat
     # Include modeule for parsing Wikipedia content from Wikipedia API.
     include Parse
 
+    attr_reader :head, :paragraphs, :header, :image_list, :refs, :sidebar_img, :title
+
     # Set title of article and type of information requested.
     #
     # title       - the title of the requested article as a String
@@ -50,7 +52,7 @@ class Wikiwhat
           find_refs
         elsif key == :sidebar_img
           @sidebar_img = value
-          find_sidebar_img
+          find_sidebar_image
         elsif key == :paragraphs
           @paras = value
           find_paragraphs
@@ -93,17 +95,12 @@ class Wikiwhat
       @refs = f_ref.refs
     end
 
-    def find_sidebar_img
+    def find_sidebar_image
       find_ref = Call.new(@title, :prop => "revisions", :rvprop => true)
       api_contents = find_ref.call_api
 
       side_img_name = Text.new(api_contents, prop = 'revisions')
       @sidebar_img = side_img_name.sidebar_image
     end
-
-    # def find_sidebar
-    #   find_ref = Call.new(@title, prop => "revisions", rvprop => true)
-    #   api_contents = find_para.call_api
-    # end
   end
 end
