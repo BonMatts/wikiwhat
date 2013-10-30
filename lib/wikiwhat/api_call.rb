@@ -17,7 +17,6 @@ module Api
     # Set instance variables.
     def initialize(title, options={})
       @title = URI::encode(title)
-      options[:prop] ? @prop = options[:prop] : @prop = ''
       options[:prop] ? @prop = "&prop=#{options[:prop]}" : ''
       options[:rvprop] ? @rvprop = "&rvprop=content" : @rvprop = ''
       options[:img_list] ? @img_list = "&generator=images" : @img_list = ''
