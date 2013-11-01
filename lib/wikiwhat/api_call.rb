@@ -4,7 +4,7 @@ require 'json'
 
 module Api
   class Call
-    attr_reader :title, :prop, :rvprop, :img_list, :iiprop
+    # attr_reader :title, :prop, :rvprop, :img_list, :iiprop
 
     # Initialize an instance of Call
     #
@@ -17,7 +17,6 @@ module Api
     # Set instance variables.
     def initialize(title, options={})
       @title = URI::encode(title)
-      options[:prop] ? @prop = options[:prop] : @prop = ''
       options[:prop] ? @prop = "&prop=#{options[:prop]}" : ''
       options[:rvprop] ? @rvprop = "&rvprop=content" : @rvprop = ''
       options[:img_list] ? @img_list = "&generator=images" : @img_list = ''

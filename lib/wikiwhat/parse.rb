@@ -23,7 +23,6 @@ module Parse
 
   # Extract portions of text from Wiki article
   class Text < Results
-    attr_reader :api_return
     def initialize(api_return, prop='extract')
       @request = self.pull_from_hash(api_return, prop)
       if @request.class == Array
@@ -58,36 +57,6 @@ module Parse
       end
     end
 
-    # Removes HTML tags from a String
-    #
-    # string - a String that contains HTML tags.
-    #
-    # Returns the string without HTML tags.
-    def only_text(string)
-      no_html_tags = string.gsub(/<\/?.*?>/,'')
-    end
-
-    # Return the text from the sidebar, if one exists
-    # def sidebar
-    #   @sidebar = content_split(0)
-    # end
-
-    # Return the image from the sidebar, if one exists
-    def sidebar_image
-      img_name = content_split(0)[/(?<= image = )\S*/].chomp
-      img_name_call = Api::Call.new(img_name, :prop => "imageinfo", :iiprop => true)
-      img_name_2 = img_name_call.call_api
-      img_array = pull_from_hash(img_name_2, "imageinfo")
-      img_array[0]["url"]
-    end
-
-    # Return all refrences as an array
-    def refs
-      @content = content_split(1, 2)
-
-      #add all references to an array. still in wiki markup
-      @content.scan(/<ref>(.*?)<\/ref>/)
-    end
 
     # Return all paragraphs under a given heading
     #
@@ -105,10 +74,46 @@ module Parse
       @request[end_first_tag..start_next_tag]
     end
 
+    # Removes HTML tags from a String
+    #
+    # string - a String that contains HTML tags.
+    #
+    # Returns the string without HTML tags.
+    def only_text(string)
+      no_html_tags = string.gsub(/<\/?.*?>/,'')
+    end
+
+    # Return the text from the sidebar, if one exists
+    # def sidebar
+    #   @sidebar = content_split(0)
+    # end
+
+    # Return the image from the sidebar, if one exists
+    def sidebar_image
+        image_name = content_split(0)[/(image\s* =\s*).*?(g|f)/]
+        image_name = image_name.split("= ")[1]
+        img_name_call = Api::Call.new(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
+        get_url = img_name_call.call_api
+        img_name_2 = pull_from_hash(get_url, "pages")
+        img_array = pull_from_hash(img_name_2, "imageinfo")
+        img_array[0]["url"]
+    end
+
+    # Return all refrences as an array
+    def refs
+      @content = content_split(1, 2)
+
+      #add all references to an array. still in wiki markup
+      @content.scan(/<ref>(.*?)<\/ref>/)
+    end
+
+
     # splits the content into side bar and everything else.
     # this method is for Parsing methods that use the raw markup from the revisions call.
     # specify start as 0 for sidebar content, for everything else specify 1 ..2
     # TODO:split the content from the catagory info
+    private
+
     def content_split(start, finish=nil)
       @content = @request.split("'''")
       if finish == nil
@@ -161,7 +166,7 @@ module Parse
         url_array << array[0]["url"]
       end
 
-      return { urls: url_array, titles: image_title_array }
+      return {urls: url_array, titles: image_title_array }
     end
   end
 end

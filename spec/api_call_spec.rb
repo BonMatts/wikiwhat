@@ -15,7 +15,7 @@ describe Api::Call do
   let(:extract) { Api::Call.new('Kel Mitchell', prop:'extracts') }
   let(:revision) {Api::Call.new('Kel Mitchell', prop:'revisions', rvprop:true)}
   let(:images){Api::Call.new('Albert Einstien', img_list:true)}
-  let(:img_url){Api::Call.new("File:Albert Einstein's exam of maturity grades (color2).jpg", prop:"imageinfo", iiprop:true)}
+  let(:img_url){Api::Call.new("File:Kelmitchellpic.jpg", prop:"imageinfo", iiprop:true)}
 
 
   describe '#form_string' do
@@ -27,7 +27,7 @@ describe Api::Call do
 
       expect(images.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&titles=Albert%20Einstien&format=json&redirects&generator=images')
 
-      expect(img_url.form_string).to eq("http://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&titles=File:Albert%20Einstein's%20exam%20of%20maturity%20grades%20(color2).jpg&format=json&redirects&iiprop=url")
+      expect(img_url.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&titles=File:Kelmitchellpic.jpg&format=json&redirects&iiprop=url')
     end
 
   end

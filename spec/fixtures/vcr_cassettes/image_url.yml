@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&iiprop=url&prop=imageinfo&redirects&titles=File:Albert%20Einstein's%20exam%20of%20maturity%20grades%20(color2).jpg
+    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&iiprop=url&prop=imageinfo&redirects&titles=File:Kelmitchellpic.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 30 Oct 2013 02:34:58 GMT
+      - Fri, 01 Nov 2013 19:32:07 GMT
       Server:
       - Apache
       X-Content-Type-Options:
@@ -33,26 +33,25 @@ http_interactions:
       Content-Encoding:
       - gzip
       Content-Length:
-      - '247'
+      - '225'
       Content-Type:
       - application/json; charset=utf-8
       X-Cache:
-      - MISS from cp1002.eqiad.wmnet
-      - MISS from cp1018.eqiad.wmnet
+      - MISS from cp1003.eqiad.wmnet
+      - MISS from cp1005.eqiad.wmnet
       X-Cache-Lookup:
-      - MISS from cp1002.eqiad.wmnet:3128
-      - MISS from cp1018.eqiad.wmnet:80
+      - MISS from cp1003.eqiad.wmnet:80
+      - MISS from cp1005.eqiad.wmnet:3128
       Connection:
       - close
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA42Q0UrEMBBFfyUMFBV2G6ygu33zQX9CJMR22h1NMjFJ0aXs
-        v5vQLbjgg/MwzJ0Lcw8zw+eE4QjtDF6PGMuwvS3d5fl+A4mSQWjhmQy2j+YN
-        QxJP5GJCcldR4Le2ggdhdZoCpaMYg+4xiuuODYfmpn73I2zAUozkxnwnC7I5
-        KaDnSIlLNsSDDtivFrmBoX2ZYQomm4eUfCvl5A3rvv6iD7LYk645jLIoX5Ts
-        2Fp2UXayu5MLp1o5q+YhqkKqeFArqVpIVdXsFtaq2Z9p87oL5BOxu0A4Z/zB
-        IH+953+xFw86vZ5y/QBCWAGXjAEAAA==
+        H4sIAAAAAAAAA3WPTU7EMAyF7+J122TKjyAHmA1bViAWUWpaQxKHxBVCVe9O
+        MgMLpMELy0/P/mxv8LFi/uodR6G4IpgNKNgZKb7ySVARmwUMjFrf94ex1zeP
+        ejTjndFXT7Dv3ZnQelOdK63oDy3HWt92ICS+cuFIHs0D+kDiFvQ+kRve0gwd
+        BCqF4lx7qjhtz5i4kHDjQllsxunXOh/2vMGafTUXkWSUWpNnOw2f9E4BJ7ID
+        51k1lZpSjkPgWJRT7lpdvGHC4jIlIY5/wD+TF8jqv4f2l73GNwM7v5xaAQAA
     http_version: 
-  recorded_at: Wed, 30 Oct 2013 02:34:58 GMT
+  recorded_at: Fri, 01 Nov 2013 19:32:08 GMT
 recorded_with: VCR 2.6.0
