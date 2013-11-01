@@ -10,19 +10,24 @@ class Wikiwhat
     # Include modeule for parsing Wikipedia content from Wikipedia API.
     include Parse
 
-    attr_reader :head, :paragraphs, :header, :image_list, :refs, :sidebar_img, :title
+    attr_reader :head, :paragraphs, :header, :image_list, :refs, :sidebar_img,
+      :title, :paras, :img_list
 
     # Set title of article and type of information requested.
     #
     # title       - the title of the requested article as a String
     # img_list    - True if desired output is a list of all images on the page.
     # header      - the desired section header as a String.
-    # refs        - True if desired output is a list of all references on the page.
+    # refs        - True if desired output is a list of all references on the
+    #               page.
     # sidebar_img - True if desired output is the image in the sidebar
     # paragraphs  - the number of paragraphs from the article as an Interger
+    #
+    # TODO
     # sidebar     - True if desired output is the contents of the sidebar.
     #
-    # Takes options hash and sets instance variables, then calls appropriate method.
+    # Takes options hash and sets instance variables, then calls appropriate
+    # method.
     def initialize(title, options={})
       @title = title
       # @img_list
@@ -56,9 +61,9 @@ class Wikiwhat
         elsif key == :paragraphs
           @paras = value
           find_paragraphs
-        elsif key == :sidebar
-          @sidebar = value
-          find_sidebar
+        # elsif key == :sidebar
+        #   @sidebar = value
+        #   find_sidebar
         end
       end
     end
@@ -92,7 +97,7 @@ class Wikiwhat
       api_contents = find_ref.call_api
 
       f_ref = Text.new(api_contents, prop = 'revisions')
-      @refs = f_ref.refs
+      @ref_list = f_ref.refs
     end
 
     def find_sidebar_image
@@ -100,7 +105,7 @@ class Wikiwhat
       api_contents = find_ref.call_api
 
       side_img_name = Text.new(api_contents, prop = 'revisions')
-      @sidebar_img = side_img_name.sidebar_image
+      @sidebar_img_url = side_img_name.sidebar_image
     end
   end
 end
