@@ -10,8 +10,8 @@ class Wikiwhat
     # Include modeule for parsing Wikipedia content from Wikipedia API.
     include Parse
 
-    attr_reader :head, :paragraphs, :header, :image_list, :refs, :sidebar_img,
-      :title, :paras, :img_list
+    attr_reader :head, :header, :image_list, :title, :img_list,
+                :sidebar_img_url, :ref_list, :paragraphs
 
     # Set title of article and type of information requested.
     #
@@ -30,12 +30,6 @@ class Wikiwhat
     # method.
     def initialize(title, options={})
       @title = title
-      # @img_list
-      # @head
-      # @refs
-      # @sidebar_img
-      # @paras
-      # @sidebar
       run(options)
     end
 
@@ -51,19 +45,19 @@ class Wikiwhat
           find_image_list
         elsif key == :header
           @head = value
-          find_header
+          self.find_header
         elsif key == :refs
           @refs = value
           find_refs
         elsif key == :sidebar_img
           @sidebar_img = value
           find_sidebar_image
-        elsif key == :paragraphs
+        elsif key == :num_paragraphs
           @paras = value
           find_paragraphs
-        # elsif key == :sidebar
-        #   @sidebar = value
-        #   find_sidebar
+        elsif key == :sidebar
+          @sidebar = value
+          find_sidebar
         end
       end
     end
