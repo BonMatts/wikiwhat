@@ -18,3 +18,5 @@ tmp
 wikihug\ brainstorm
 
 vendor/bundle
+
+miscdatafiles/*
