@@ -11,18 +11,18 @@ require_relative 'testfiles/api_call_contents'
 
 include Api
 
-describe Api::Call do  
-  let(:extract) { Api::Call.new('Kel Mitchell', prop:'extracts') }
-  let(:revision) {Api::Call.new('Kel Mitchell', prop:'revisions', rvprop:true)}
-  let(:images){Api::Call.new('Albert Einstien', img_list:true)}
-  let(:img_url){Api::Call.new("File:Albert Einstein's exam of maturity grades (color2).jpg", prop:"imageinfo", iiprop:true)}
+describe Api::Call do
+  let(:extract)  { Api::Call.new('Kel Mitchell', prop:'extracts') }
+  let(:revision) { Api::Call.new('Kel Mitchell', prop:'revisions', rvprop:true)}
+  let(:images)   { Api::Call.new('Albert Einstien', img_list:true)}
+  let(:img_url)  { Api::Call.new("File:Albert Einstein's exam of maturity grades (color2).jpg", prop:"imageinfo", iiprop:true)}
 
 
   describe '#form_string' do
     it 'forms url string with correct parameters' do
-      
+
       expect(extract.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=Kel%20Mitchell&format=json&redirects')
-      
+
       expect(revision.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Kel%20Mitchell&format=json&redirects&rvprop=content')
 
       expect(images.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&titles=Albert%20Einstien&format=json&redirects&generator=images')
@@ -34,7 +34,7 @@ describe Api::Call do
 
   describe '#call_api' do
     context 'extract call' do
-      it 'uses RestClient to make API call' do   
+      it 'uses RestClient to make API call' do
         VCR.use_cassette('kel_extract') do
           api_output = extract.call_api
 
@@ -47,7 +47,7 @@ describe Api::Call do
     context 'revisions call' do
       it 'uses RestClient to make API call' do
         VCR.use_cassette('kel_revisions') do
-          api_output = revision.call_api 
+          api_output = revision.call_api
 
           expect(api_output).to be_a(Hash)
           expect(api_output).to eq(rev_output)
