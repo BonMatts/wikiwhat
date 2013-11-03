@@ -54,10 +54,10 @@ describe Parse::Media do
 
   describe '#list_images' do
     it "pulls out file names and queries the api for their urls, returns an array of urls" do
-       Api::Call.any_instance.stub(:call_api).and_return("http://upload.wikimedia.org/wikipedia/commons/3/37/1919_eclipse_positive.jpg", "http://upload.wikimedia.org/wikipedia/commons/c/c3/Albert_Einstein%27s_exam_of_maturity_grades_%28color2%29.jpg", "http://upload.wikimedia.org/wikipedia/commons/5/50/Albert_Einstein_%28Nobel%29.png", "http://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg", "http://upload.wikimedia.org/wikipedia/commons/a/ad/Albert_Einstein_as_a_child.jpg", "http://upload.wikimedia.org/wikipedia/commons/f/fb/Albert_Einstein_at_the_age_of_three_%281882%29.jpg", "http://upload.wikimedia.org/wikipedia/commons/6/6b/Albert_Einstein_german.ogg", "http://upload.wikimedia.org/wikipedia/commons/1/10/Albert_Einstein_photo_1920.jpg", "http://upload.wikimedia.org/wikipedia/commons/1/11/Albert_Einstein_photo_1921.jpg", "http://upload.wikimedia.org/wikipedia/commons/d/d7/Albert_Einstein_signature_1934.svg")
+      Api::Call.any_instance.stub(:call_api).and_return(media_list_1, media_list_2, media_list_3, media_list_4, media_list_5, media_list_6, media_list_7, media_list_8, media_list_9, media_list_10)
 
       expect(albert.list_images).to eq(list_images_output)
     end
-  end
+  end  
 end
 
