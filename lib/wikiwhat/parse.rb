@@ -90,19 +90,27 @@ module Parse
 
     # Return the image from the sidebar, if one exists
     def sidebar_image
+      # Check to see if a sidebar image exists
       if content_split(0)[/(image\s* =\s*).*?(g|f)/]
+        # Grab the sidebar image title
         image_name = content_split(0)[/(image\s* =\s*).*?(g|f)/]
+        # Remove the 'image = ' part of the string
         image_name = image_name.split("= ")[1]
+        # Call Wikipedia for image url
         get_url = Api::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
+        # Pull url from hash
         img_name_2 = pull_from_hash(get_url, "pages")
         img_array = pull_from_hash(img_name_2, "imageinfo")
         img_array[0]["url"]
       else
+        # If no sidebar image exists, rails error.
         raise NoMethodError.new("Sorry, it looks like there is no sidebar image on this page.")
       end
     end
 
     # Return all refrences as an array
+    #
+    # TODO: Currently nested array, want to return as array of strings.
     def refs
       @content = content_split(1, 2)
 
@@ -110,13 +118,13 @@ module Parse
       @content.scan(/<ref>(.*?)<\/ref>/)
     end
 
-
-    # splits the content into side bar and everything else.
-    # this method is for Parsing methods that use the raw markup from the revisions call.
-    # specify start as 0 for sidebar content, for everything else specify 1 ..2
-    # TODO:split the content from the catagory info
     private
 
+    # Splits the content into side bar and everything else.
+    # This method is for Parsing methods that use the raw markup from the revisions call.
+    # Specify start as 0 for sidebar content, for everything else specify 'content_split(1, -1)'
+    #
+    # TODO:split the content from the catagory info
     def content_split(start, finish=nil)
       @content = @request.split("'''")
       if finish == nil
