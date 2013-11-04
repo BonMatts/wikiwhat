@@ -35,11 +35,6 @@ describe Wikiwhat::Page do
     end
     context 'When :num_paragraphs is set in the options hash and is higher than
             the number availble' do
-      it "calls Call.api" do
-        Api::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
-        pigeon = Wikiwhat::Page.new("Columba livia", :num_paragraphs => 999)
-        expect(Api::Call).to have_received(:call_api)
-      end
       it "calls #paragraphs on a Parse::Text instance" do
         Api::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
         expect_any_instance_of(Parse::Text).to receive(:paragraph).with(999)
@@ -105,19 +100,15 @@ describe Wikiwhat::Page do
       end
     end
     context "When #find_header with no argument is called on a Wikiwhat::Page instance," do
-      it "raises an exception" do
-pending
+      let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
+      it "Raises an exception" do
+        expect { pigeon.find_header }.to raise_error(ArgumentError)
       end
     end
     context "When a header not present in the article is specified in the options hash" do
-      it "calls Call.api" do
-pending
-        Api::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
-        pigeon = Wikiwhat::Page.new("Columba livia", :header => "Biography")
-        expect(Api::Call).to have_received(:call_api)
-      end
-      it "raises an excepiton" do
-pending
+      let(:pigeon) { Wikiwhat::Page.new("Columba livia", :header => "Biography") }
+      it "Raises an exception" do
+        expect { pigeon.find_header }.to raise_error
       end
     end
   end
@@ -150,6 +141,9 @@ pending
       end
     end
     context "When the page has no references" do
+      it "Does something about having no references" do
+        pending
+      end
     end
   end
 

@@ -63,15 +63,23 @@ module Parse
     # header = the name of the header as a String
     # paras  = the number of paragraphs
     def find_header(header)
-      # Find the requested header
-      start = @request.index(header)
-      # Find next instance of the tag.
-      end_first_tag = start + @request[start..-1].index("h2") + 3
-      # Find
-      start_next_tag = @request[end_first_tag..-1].index("h2") +
-        end_first_tag - 2
-      # Select substring of requested text.
-      @request[end_first_tag..start_next_tag]
+      if header
+        # Find the requested header
+        start = @request.index(header)
+        if start
+          # Find next instance of the tag.
+          end_first_tag = start + @request[start..-1].index("h2") + 3
+          # Find
+          start_next_tag = @request[end_first_tag..-1].index("h2") +
+            end_first_tag - 2
+          # Select substring of requested text.
+          @request[end_first_tag..start_next_tag]
+        else
+          raise Error.new("Sorry, that header isn't on this page.")
+        end
+      else
+        raise ArgumentError.new("Sorry, you didn't give us a header, so we don't know which part of the page you want.")
+      end
     end
 
     # Removes HTML tags from a String
@@ -103,7 +111,7 @@ module Parse
         img_array = pull_from_hash(img_name_2, "imageinfo")
         img_array[0]["url"]
       else
-        # If no sidebar image exists, rails error.
+        # If no sidebar image exists, raise error.
         raise NoMethodError.new("Sorry, it looks like there is no sidebar image on this page.")
       end
     end
