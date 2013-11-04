@@ -36,7 +36,7 @@ describe Parse::Text do
 
   describe '#sidebar_image' do
     it "returns the URL of the sidebar image, if any" do
-      expect_any_instance_of(Api::Call).to receive(:call_api).and_return(img_url_output)
+      expect(Api::Call).to receive(:call_api).and_return(img_url_output)
       expect(kel_rev.sidebar_image).to eq(img_url_content)
     end
   end
@@ -54,9 +54,10 @@ describe Parse::Media do
 
   describe '#list_images' do
     it "pulls out file names and queries the api for their urls, returns an array of urls" do
-      Api::Call.any_instance.stub(:call_api).and_return(media_list_1, media_list_2, media_list_3, media_list_4, media_list_5, media_list_6, media_list_7, media_list_8, media_list_9, media_list_10)
+      Api::Call.stub(:call_api).and_return(media_list_1, media_list_2, media_list_3, media_list_4, media_list_5, media_list_6, media_list_7, media_list_8, media_list_9, media_list_10)
 
       expect(albert.list_images).to eq(list_images_output)
+
     end
   end  
 end
