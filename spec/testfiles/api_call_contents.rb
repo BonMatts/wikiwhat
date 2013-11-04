@@ -86,7 +86,6 @@ end
 
 def media_list_8 
  {"query-continue"=>{"imageinfo"=>{"iistart"=>"2009-11-16T02:27:57Z"}}, "query"=>{"pages"=>{"-1"=>{"ns"=>6, "title"=>"File:Albert Einstein photo 1920.jpg", "missing"=>"", "imagerepository"=>"shared", "imageinfo"=>[{"url"=>"http://upload.wikimedia.org/wikipedia/commons/1/10/Albert_Einstein_photo_1920.jpg", "descriptionurl"=>"http://commons.wikimedia.org/wiki/File:Albert_Einstein_photo_1920.jpg"}]}}}} 
-       "extract"=>
  end
 
 def media_list_9 
