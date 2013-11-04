@@ -45,7 +45,7 @@ class Wikiwhat
           find_image_list
         elsif key == :header
           @head = value
-          self.find_header
+          find_header(value)
         elsif key == :refs
           @refs = value
           find_refs
@@ -54,7 +54,7 @@ class Wikiwhat
           find_sidebar_image
         elsif key == :num_paragraphs
           @paras = value
-          find_paragraphs
+          find_paragraphs(value)
         elsif key == :sidebar
           @sidebar = value
           find_sidebar
@@ -62,42 +62,34 @@ class Wikiwhat
       end
     end
 
-
-    def find_paragraphs
-      find_para = Call.new(@title, :prop => "extracts")
-      api_contents = find_para.call_api
-
+    def find_paragraphs(paras = 1)
+      @paras = paras
+      api_contents = Call.call_api(@title, :prop => "extracts")
       para = Text.new(api_contents)
-      @paragraphs = para.paragraph(@paras || 1)
+      @paragraphs = para.paragraph(@paras)
     end
 
     def find_image_list
-      find_img_list = Call.new(@title, :img_list => true)
-      api_contents = find_img_list.call_api
+      api_contents = Call.call_api(@title, :img_list => true)
       img_list = Media.new(api_contents, 'pages')
       @image_list = img_list.list_images
     end
 
-    def find_header
-      find_head = Call.new(@title, :prop => "extracts")
-      api_contents = find_head.call_api
-
+    def find_header(head)
+      @head = head
+      api_contents = Call.call_api(@title, :prop => "extracts")
       head_text = Text.new(api_contents)
       @header = head_text.find_header(@head)
     end
 
     def find_refs
-      find_ref = Call.new(@title, :prop => "revisions", :rvprop => true)
-      api_contents = find_ref.call_api
-
+      api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       f_ref = Text.new(api_contents, prop = 'revisions')
       @ref_list = f_ref.refs
     end
 
     def find_sidebar_image
-      find_ref = Call.new(@title, :prop => "revisions", :rvprop => true)
-      api_contents = find_ref.call_api
-
+      api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       side_img_name = Text.new(api_contents, prop = 'revisions')
       @sidebar_img_url = side_img_name.sidebar_image
     end

@@ -90,13 +90,16 @@ module Parse
 
     # Return the image from the sidebar, if one exists
     def sidebar_image
+      if content_split(0)[/(image\s* =\s*).*?(g|f)/]
         image_name = content_split(0)[/(image\s* =\s*).*?(g|f)/]
         image_name = image_name.split("= ")[1]
-        img_name_call = Api::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
-        get_url = img_name_call.call_api
+        get_url = Api::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
         img_name_2 = pull_from_hash(get_url, "pages")
         img_array = pull_from_hash(img_name_2, "imageinfo")
         img_array[0]["url"]
+      else
+        raise NoMethodError.new("Sorry, it looks like there is no sidebar image on this page.")
+      end
     end
 
     # Return all refrences as an array
@@ -117,9 +120,9 @@ module Parse
     def content_split(start, finish=nil)
       @content = @request.split("'''")
       if finish == nil
-        return @content[start]
+        @content[start]
       else
-        return @content[start..finish].join
+        @content[start..finish].join
       end
     end
   end
@@ -137,15 +140,14 @@ module Parse
       isolated_list = @request
       # Parse JSON object for list of image titles
       image_title_array = []
-      isolated_list.each do |key, value|
+      isolated_list.collect do |key, value|
         image_title_array << value["title"]
       end
 
       # Make API call for individual image links
       img_url_call_array = []
       image_title_array.each do |title|
-        individual_img_call = Api::Call.call_api(title, :prop => "imageinfo", :iiprop => true)
-        img_url_call_array << individual_img_call.call_api
+        img_url_call_array << Api::Call.call_api(title, :prop => "imageinfo", :iiprop => true)
       end
 
       # Pull pages object containing imageinfo array out from JSON object
