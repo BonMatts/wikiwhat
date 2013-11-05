@@ -16,7 +16,7 @@ A Ruby gem for extracting specific content from a [Wikipedia](http://wikipedia.c
 
 Add this line to your application's Gemfile:
 
-    gem 'wikiwhat'
+    $ gem 'wikiwhat'
 
 And then execute:
 
@@ -35,14 +35,14 @@ This gem makes use of [Wikipedia](http://wikipedia.com), which is a Creative Com
 Each article to be queried should be set up as a new Wikiwhat::Page object. Queries are made via the Wikipedia API, which has limited redirect capabilities. Misspelled  or ambiguious titles may return unexpected results.
 
 ```ruby
-	page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>")
+page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>")
 ```
 
 Example:
 
 ```ruby
-	pigeon = Wikiwhat::Page.new("Columba livia")
-	albert = Wikiwhat::Page.new("Albert Einstein")
+pigeon = Wikiwhat::Page.new("Columba livia")
+albert = Wikiwhat::Page.new("Albert Einstein")
 ```
 
 ######Types of infomation available:
