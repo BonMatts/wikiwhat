@@ -36,7 +36,7 @@ describe Parse::Text do
 
   describe '#sidebar_image' do
     it "returns the URL of the sidebar image, if any" do
-      expect(Api::Call).to receive(:call_api).and_return(img_url_output)
+      Api::Call.stub(:call_api).and_return(img_url_output)
       expect(kel_rev.sidebar_image).to eq(img_url_content)
     end
   end

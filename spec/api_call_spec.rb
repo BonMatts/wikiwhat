@@ -9,25 +9,8 @@ require 'spec_helper'
 require_relative '../lib/wikiwhat/api_call'
 require_relative 'testfiles/api_call_contents'
 
-include Api
 
 describe Api::Call do  
-  
-
-
-  # describe '.form_string' do
-  #   it 'forms url string with correct parameters' do
-      
-  #     expect(extract.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=Kel%20Mitchell&format=json&redirects')
-      
-  #     expect(revision.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Kel%20Mitchell&format=json&redirects&rvprop=content')
-
-  #     expect(images.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&titles=Albert%20Einstien&format=json&redirects&generator=images')
-
-  #     expect(img_url.form_string).to eq('http://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&titles=File:Kelmitchellpic.jpg&format=json&redirects&iiprop=url')
-  #   end
-
-  # end
 
   describe '.call_api' do
     context 'extract call' do
