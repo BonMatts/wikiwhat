@@ -32,24 +32,28 @@ This gem makes use of [Wikipedia](http://wikipedia.com), which is a Creative Com
 
 ######To create a new Wikiwhat::Page object:
 
-Each article to be queried should be set up as a new Wikiwhat::Page object. Queries are made via the API, which has limited redirect capabilities. Misspelled  or ambiguious titles may return unexpected results.
-	
+Each article to be queried should be set up as a new Wikiwhat::Page object. Queries are made via the Wikipedia API, which has limited redirect capabilities. Misspelled  or ambiguious titles may return unexpected results.
+
+```ruby
 	page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>")
-	
+```
+
 Example:
 
+```ruby
 	pigeon = Wikiwhat::Page.new("Columba livia")
 	albert = Wikiwhat::Page.new("Albert Einstein")
+```
 
 ######Types of infomation available:
 
 * Paragraph(s) in an article
 * All paragraphs under a specific header
-* A list of all image titles and corrisponding URIs found in an article
+* A list of all image titles and corresponding URLs found in an article
 * The sidebar image
 * A list of all references found in an article
 
-These methods must be done consecutively. We currently do not support setting multiple options at once in a single new Wikiwhat object. However, the indivudual methods can all be called on the same instance of Wikiwhat::Page.
+These methods must be done independently. We currently do not support setting multiple options at once in a single new Wikiwhat object. However, the indivudual methods can all be called on the same instance of Wikiwhat::Page.
 
 ######To get the first several paragraphs in an article:
 
