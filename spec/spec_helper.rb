@@ -1,5 +1,7 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'wikiwhat'
 # VCR for testing APIs
-
 require 'vcr'
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
