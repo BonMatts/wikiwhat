@@ -7,7 +7,7 @@ class Wikiwhat
   class Page
     # Include module for calling Wikipedia API.
     include Api
-    # Include modeule for parsing Wikipedia content from Wikipedia API.
+    # Include module for parsing Wikipedia content from Wikipedia API.
     include Parse
 
     attr_reader :head, :header, :image_list, :title, :img_list,

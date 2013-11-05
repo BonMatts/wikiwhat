@@ -5,6 +5,7 @@ require_relative 'testfiles/api_call_contents'
 
 include Api
 include Parse
+include WikiwhatApp
 
 describe Wikiwhat::Page do
   describe "#find_paragraphs" do
@@ -108,7 +109,7 @@ describe Wikiwhat::Page do
     context "When a header not present in the article is specified in the options hash" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia", :header => "Biography") }
       it "Raises an exception" do
-        expect { pigeon.find_header }.to raise_error
+        expect { pigeon.find_header }.to raise_error(WikiwhatError)
       end
     end
   end
@@ -177,7 +178,7 @@ describe Wikiwhat::Page do
     context "When no sidebar image exists" do
       let(:chad) { Wikiwhat::Page.new("Chad Muska") }
       it "Raises an exception" do
-        expect { chad.find_sidebar_image }.to raise_error(NoMethodError)
+        expect { chad.find_sidebar_image }.to raise_error(WikiwhatError)
       end
     end
   end

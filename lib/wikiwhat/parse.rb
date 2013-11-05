@@ -1,3 +1,8 @@
+module WikiwhatApp
+  class WikiwhatError < StandardError
+  end
+end
+
 module Parse
   class Results
     def initialize
@@ -23,6 +28,9 @@ module Parse
 
   # Extract portions of text from Wiki article
   class Text < Results
+
+    include WikiwhatApp
+
     def initialize(api_return, prop='extract')
       @request = self.pull_from_hash(api_return, prop)
       if @request.class == Array
@@ -57,28 +65,23 @@ module Parse
       end
     end
 
-
     # Return all paragraphs under a given heading
     #
     # header = the name of the header as a String
     # paras  = the number of paragraphs
     def find_header(header)
-      if header
-        # Find the requested header
-        start = @request.index(header)
-        if start
-          # Find next instance of the tag.
-          end_first_tag = start + @request[start..-1].index("h2") + 3
-          # Find
-          start_next_tag = @request[end_first_tag..-1].index("h2") +
-            end_first_tag - 2
-          # Select substring of requested text.
-          @request[end_first_tag..start_next_tag]
-        else
-          raise Error.new("Sorry, that header isn't on this page.")
-        end
+      # Find the requested header
+      start = @request.index(header)
+      if start
+        # Find next instance of the tag.
+        end_first_tag = start + @request[start..-1].index("h2") + 3
+        # Find
+        start_next_tag = @request[end_first_tag..-1].index("h2") +
+          end_first_tag - 2
+        # Select substring of requested text.
+        @request[end_first_tag..start_next_tag]
       else
-        raise ArgumentError.new("Sorry, you didn't give us a header, so we don't know which part of the page you want.")
+        raise WikiwhatError.new("Sorry, that header isn't on this page.")
       end
     end
 
@@ -112,7 +115,7 @@ module Parse
         img_array[0]["url"]
       else
         # If no sidebar image exists, raise error.
-        raise NoMethodError.new("Sorry, it looks like there is no sidebar image on this page.")
+        raise WikiwhatError.new("Sorry, it looks like there is no sidebar image on this page.")
       end
     end
 
@@ -127,7 +130,6 @@ module Parse
     end
 
     private
-
     # Splits the content into side bar and everything else.
     # This method is for Parsing methods that use the raw markup from the revisions call.
     # Specify start as 0 for sidebar content, for everything else specify 'content_split(1, -1)'
