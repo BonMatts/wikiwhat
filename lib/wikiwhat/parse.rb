@@ -1,5 +1,5 @@
 module Wikiwhat
-  class WikiwhatError < StandardError
+    class WikiwhatError < StandardError
   end
 
   class Results
@@ -160,7 +160,7 @@ module Wikiwhat
       image_title_array = []
       isolated_list.collect do |key, value|
         image_title_array << value["title"]
-      end
+        end
 
       # Make API call for individual image links
       img_url_call_array = []

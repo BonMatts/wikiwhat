@@ -14,7 +14,7 @@ module Wikiwhat
       options[:img_list] ? img_list = "&generator=images" : img_list = ''
       options[:iiprop] ? iiprop = "&iiprop=url" : iiprop = ''
 
-      JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query#{prop}&titles=#{title}&format=json&redirects#{img_list}#{rvprop}#{iiprop}")
+        JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query#{prop}&titles=#{title}&format=json&redirects#{img_list}#{rvprop}#{iiprop}")
     end
   end
 end
