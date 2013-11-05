@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Wikiwhat::VERSION
   spec.authors       = ["Bonnie Mattson, Clare Glinka"]
   spec.email         = ["blmattson@gmail.com, glinka.cb@gmail.com"]
-  spec.description   = "media wiki api wrapper"
-  spec.summary       = "soooooo coool"
+  spec.description   = "Gem for extracting specific content from Wikipedia articles."
+  spec.summary       = ""
   spec.homepage      = "https://github.com/kitsunetsuki/Wikiwhat"
   spec.license       = "MIT"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "json"
   spec.add_dependency "rest-client"
-  
+
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "vcr"
