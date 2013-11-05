@@ -2,10 +2,8 @@ require 'json'
 require 'wikiwhat/parse'
 require 'wikiwhat/api_call'
 
-
 module Wikiwhat
   class Page
-
     attr_reader :head, :header, :image_list, :title, :img_list,
                 :sidebar_img_url, :ref_list, :paragraphs
 

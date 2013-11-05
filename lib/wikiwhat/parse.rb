@@ -1,5 +1,5 @@
 module Wikiwhat
-    class WikiwhatError < StandardError
+  class WikiwhatError < StandardError
   end
 
   class Results
@@ -72,12 +72,11 @@ module Wikiwhat
         # Find next instance of the tag.
         end_first_tag = start + @request[start..-1].index("h2") + 3
         # Find
-        start_next_tag = @request[end_first_tag..-1].index("h2") +
-          end_first_tag - 2
+        start_next_tag = @request[end_first_tag..-1].index("h2") + end_first_tag - 2
         # Select substring of requested text.
         @request[end_first_tag..start_next_tag]
       else
-        raise WikiwhatError.new("Sorry, that header isn't on this page.")
+        raise Wikiwhat::WikiwhatError.new("Sorry, that header isn't on this page.")
       end
     end
 
@@ -112,7 +111,7 @@ module Wikiwhat
         img_array[0]["url"]
       else
         # If no sidebar image exists, raise error.
-        raise WikiwhatError.new("Sorry, it looks like there is no sidebar image
+        raise Wikiwhat::WikiwhatError.new("Sorry, it looks like there is no sidebar image
           on this page.")
       end
     end
@@ -160,7 +159,7 @@ module Wikiwhat
       image_title_array = []
       isolated_list.collect do |key, value|
         image_title_array << value["title"]
-        end
+      end
 
       # Make API call for individual image links
       img_url_call_array = []

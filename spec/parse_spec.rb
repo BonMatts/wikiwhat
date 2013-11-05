@@ -30,8 +30,7 @@ describe Wikiwhat::Text do
   describe '#find header' do
     it "returns paragraphs under a specific header" do
 
-      expect(kel.find_header("Personal")).to eq((ext_all_paras[5].split("</h2>")
-        [1]+"\n"))
+      expect(kel.find_header("Personal")).to eq((ext_all_paras[5].split("</h2>")[1]+"\n"))
     end
   end
 
