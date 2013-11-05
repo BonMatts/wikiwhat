@@ -6,12 +6,12 @@ A Ruby gem for extracting specific content from a [Wikipedia](http://wikipedia.c
 
 ## Table of Contents
 
-1. [Installation][installation]
-2. [Usage][usage]
-3. [Examples][examples]
-4. [Contribute][contribute]
-5. [Team][team]
-6. [License][license]
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Examples](#examples)
+4. [Contribute](#contribute)
+5. [Team](#team)
+6. [License](#license)
 
 ## Installation
 
