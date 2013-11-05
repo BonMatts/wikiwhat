@@ -43,8 +43,6 @@ describe Wikiwhat::Page do
       end
     end
   end
-
-  # find_image_list
   describe "#find_image_list" do
     context "When #find_image_list is called on a Wikiwhat::Page instance" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
@@ -72,8 +70,6 @@ describe Wikiwhat::Page do
       end
     end
   end
-
-  # find_header
   describe "#find_header" do
     context "When a header present in the article is specified in the options hash," do
       it "calls Call.api" do
@@ -113,8 +109,6 @@ describe Wikiwhat::Page do
       end
     end
   end
-
-  # find_refs
   describe "#find_refs" do
     context "When refs => true is specified in the options hash" do
       it "calls Call.api" do
@@ -147,8 +141,6 @@ describe Wikiwhat::Page do
       end
     end
   end
-
-  # find_sidebar_image
   describe "#find_sidebar_image" do
     context "When sidebar_img => true is specified in the options hash" do
       it "calls Call.api" do
@@ -183,28 +175,3 @@ describe Wikiwhat::Page do
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

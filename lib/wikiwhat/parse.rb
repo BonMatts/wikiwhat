@@ -1,9 +1,7 @@
-module WikiwhatApp
+module Wikiwhat
   class WikiwhatError < StandardError
   end
-end
 
-module Parse
   class Results
     def initialize
       @result = nil
@@ -28,8 +26,6 @@ module Parse
 
   # Extract portions of text from Wiki article
   class Text < Results
-
-    include WikiwhatApp
 
     def initialize(api_return, prop='extract')
       @request = self.pull_from_hash(api_return, prop)
@@ -108,14 +104,16 @@ module Parse
         # Remove the 'image = ' part of the string
         image_name = image_name.split("= ")[1]
         # Call Wikipedia for image url
-        get_url = Api::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
+        get_url = Wikiwhat::Call.call_api(('File:'+ image_name),
+          :prop => "imageinfo", :iiprop => true)
         # Pull url from hash
         img_name_2 = pull_from_hash(get_url, "pages")
         img_array = pull_from_hash(img_name_2, "imageinfo")
         img_array[0]["url"]
       else
         # If no sidebar image exists, raise error.
-        raise WikiwhatError.new("Sorry, it looks like there is no sidebar image on this page.")
+        raise WikiwhatError.new("Sorry, it looks like there is no sidebar image
+          on this page.")
       end
     end
 
@@ -131,8 +129,10 @@ module Parse
 
     private
     # Splits the content into side bar and everything else.
-    # This method is for Parsing methods that use the raw markup from the revisions call.
-    # Specify start as 0 for sidebar content, for everything else specify 'content_split(1, -1)'
+    # This method is for Parsing methods that use the raw markup from the
+    # revisions call.
+    # Specify start as 0 for sidebar content, for everything else specify
+    # 'content_split(1, -1)'
     #
     # TODO:split the content from the catagory info
     def content_split(start, finish=nil)
@@ -165,7 +165,8 @@ module Parse
       # Make API call for individual image links
       img_url_call_array = []
       image_title_array.each do |title|
-        img_url_call_array << Api::Call.call_api(title, :prop => "imageinfo", :iiprop => true)
+        img_url_call_array << Wikiwhat::Call.call_api(title,
+          :prop => "imageinfo", :iiprop => true)
       end
 
       # Pull pages object containing imageinfo array out from JSON object

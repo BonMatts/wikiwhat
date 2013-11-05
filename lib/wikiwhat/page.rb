@@ -5,10 +5,6 @@ require 'wikiwhat/api_call'
 
 module Wikiwhat
   class Page
-    # Include module for calling Wikipedia API.
-    include Api
-    # Include module for parsing Wikipedia content from Wikipedia API.
-    include Parse
 
     attr_reader :head, :header, :image_list, :title, :img_list,
                 :sidebar_img_url, :ref_list, :paragraphs

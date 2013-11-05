@@ -2,7 +2,7 @@ require 'open-uri'
 require 'rest_client'
 require 'json'
 
-module Api
+module Wikiwhat
   class Call
     # Make a string that is the URL for the API call for text-based requests.
     # Call the API and parse the returning JSON object.
