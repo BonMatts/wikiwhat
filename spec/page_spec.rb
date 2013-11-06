@@ -3,10 +3,7 @@ require 'bundler/setup'
 require 'rspec'
 require 'spec_helper'
 
-
 require_relative 'testfiles/api_call_contents'
-
-
 
 describe Wikiwhat::Page do
   describe "#paragraphs" do

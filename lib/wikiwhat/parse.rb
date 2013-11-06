@@ -39,6 +39,7 @@ module Wikiwhat
     # quantity - the Number of paragraphs to be returned starting from the top
     #            of the article. Defaults is to get the first paragraph.
     #
+    # Return an array of strings.
     def paragraph(quantity)
       # Break the article into individual paragraphs and store in an array.
       start = @request.split("</p>")
@@ -61,10 +62,12 @@ module Wikiwhat
       end
     end
 
-    # Return all paragraphs under a given heading
+    # Find all paragraphs under a given heading
     #
     # header = the name of the header as a String
     # paras  = the number of paragraphs
+    #
+    # Return a String.
     def find_header(header)
       # Find the requested header
       start = @request.index(header)
@@ -94,17 +97,18 @@ module Wikiwhat
     #   @sidebar = content_split(0)
     # end
 
-    # Return the image from the sidebar, if one exists
+    # Find the image from the sidebar, if one exists
+    #
+    # Return the url of the image as a String.
     def sidebar_image
       # Check to see if a sidebar image exists
-      if content_split(0)[/(image\s* =\s*).*?(g|f)/]
+      if content_split(0)[/(image\s* =\s*).*?\w(\.\w\w(g|f))/]
         # Grab the sidebar image title
-        image_name = content_split(0)[/(image\s* =\s*).*?(g|f)/]
+        image_name = content_split(0)[/(image\s* =\s*).*?\w(\.\w\w(g|f))/]
         # Remove the 'image = ' part of the string
         image_name = image_name.split("= ")[1]
         # Call Wikipedia for image url
-        get_url = Wikiwhat::Call.call_api(('File:'+ image_name),
-          :prop => "imageinfo", :iiprop => true)
+        get_url = Wikiwhat::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
         # Pull url from hash
         img_name_2 = pull_from_hash(get_url, "pages")
         img_array = pull_from_hash(img_name_2, "imageinfo")
@@ -116,7 +120,9 @@ module Wikiwhat
       end
     end
 
-    # Return all refrences as an array
+    # Find all references on a page.
+    #
+    # Return all refrences as an array of arrays.
     #
     # TODO: Currently nested array, want to return as array of strings.
     def refs
@@ -150,8 +156,9 @@ module Wikiwhat
       @request = self.pull_from_hash(api_return, prop)
     end
 
-    # Return a hash containing an array of urls and an array of image titles.
+    # Find all the media items on a page.
     #
+    # Return a hash containing an array of urls and an array of titles.
     def list_images
       # Call API for initial list of images
       isolated_list = @request
