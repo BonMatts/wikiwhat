@@ -112,35 +112,35 @@ Example 1:
 pigeon = Wikiwhat::Page.new("Columba livia", :header => "Description")
 	
 => "\n\n<p>The adult of the nominate subspecies of the Rock Dove is 29 to 37 cm (11 to 15 in) long with a 62 to 72 cm (24 to 28 in) wingspan. Weight for wild or feral Rock Doves ranges from 238–380 g (8.4–13 oz), though . . ."
-```	
+```
 Example 2:
 
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia")
 pigeon.find_header("Predators")
-	
+
 => 	"\n<p>With only its flying abilities protecting it from predation, rock pigeons are a favorite almost around the world for a wide range of raptorial birds. In fact, with feral pigeons existing in most every city in the world, they may form the majority of prey for several . . ."
 ```
 
 ######To get a list of all the images on a page, plus their URLs:
 
-```ruby	
+```ruby
 page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>", :img_list => true)
 ```
 
 You can also call `.image_list` directly on your Wikiwhat::Page object.
-	
+
 ```
 page.image_list
 ```
 
 This method will return a hash with two keys: `urls` and `titles`. Each key points to an array of strings. Currently, the Wikipedia logo image is included in the list. The hash is stored under the instance variable `@image_list`.
 
-Example 1: 
+Example 1:
 
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia", :img_list => true)
-	
+
 => {:urls=>
     ["http://upload.wikimedia.org/wikipedia/commons/4/43/Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg",
      "http://upload.wikimedia.org/wikipedia/commons/e/ec/Blue_Rock_Pigeon_I4_IMG_3038.jpg",
@@ -170,7 +170,7 @@ Example 2:
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia")
 pigeon.find_image_list
-	
+
 => {:urls=>
     ["http://upload.wikimedia.org/wikipedia/commons/4/43/Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg",
      "http://upload.wikimedia.org/wikipedia/commons/e/ec/Blue_Rock_Pigeon_I4_IMG_3038.jpg",
@@ -214,7 +214,8 @@ Example 1:
 ```ruby
 albert = Wikiwhat::Page.new("Albert Einstein", :refs => true)
 
-=> [["Zahar, Élie (2001), ''Poincaré's Philosophy. From Conventionalism to Phenomenology'', Carus Publishing Company, [http://books.google.com/?id=jJl2JAqvoSAC
+=> [
+    ["Zahar, Élie (2001), ''Poincaré's Philosophy. From Conventionalism to Phenomenology'', Carus Publishing Company, [http://books.google.com/?id=jJl2JAqvoSAC
    ["{{cite doi|10.1098/rsbm.1955.0005}}"],
    ["David Bodanis, ''E&nbsp;=&nbsp;mc<sup>2</sup>: A Biography of the World's Most Famous Equation'' (New York: Walker, 2000)."],
    ["{{cite web |url=http://nobelprize.org/nobel_prizes/physics/laureates/1921/ |title=The Nobel Prize in Physics 1921 |accessdate=6 March 2007 |publisher=[[N
