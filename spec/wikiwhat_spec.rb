@@ -106,6 +106,7 @@ describe Wikiwhat::Page do
     context "When a header not present in the article is specified in the options hash" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia", :header => "Biography") }
       it "Raises an exception" do
+        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
         expect { pigeon.header }.to raise_error(Wikiwhat::WikiwhatError)
       end
     end
@@ -171,7 +172,8 @@ describe Wikiwhat::Page do
     context "When no sidebar image exists" do
       let(:chad) { Wikiwhat::Page.new("Chad Muska") }
       it "Raises an exception" do
-        expect { chad.sidebar_image }.to raise_error(WikiwhatErroWikiwhat::r)
+         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_chad_revisions)
+        expect { chad.sidebar_image }.to raise_error(Wikiwhat::WikiwhatError)
       end
     end
   end
