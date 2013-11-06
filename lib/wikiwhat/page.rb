@@ -36,22 +36,16 @@ module Wikiwhat
       hash.each do |key, value|
         case key
           when:img_list
-            @img_list = value
             image_list
           when:header
-            @head = value
             header(value)
           when:refs
-            @refs = value
             find_ref_list
           when:sidebar_img
-            @sidebar_img = value
             sidebar_image
           when:num_paragraphs
-            @paras = value
             paragraphs(value)
           when:sidebar
-            @sidebar = value
             sidebar_image
         end
       end
@@ -126,7 +120,7 @@ module Wikiwhat
     def find_sidebar_image
       api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       side_img_name = Text.new(api_contents, prop = 'revisions')
-      @sidebar_img = side_img_name.sidebar_image
+      @sidebar_image = side_img_name.sidebar_image
     end
   end
 end
