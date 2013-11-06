@@ -34,29 +34,52 @@ module Wikiwhat
     # Runs the appropriate method based on the options hash.
     def run(hash)
       hash.each do |key, value|
-        if key == :img_list
-          @img_list = value
-          find_image_list
-        elsif key == :header
-          @head = value
-          find_header(value)
-        elsif key == :refs
-          @refs = value
-          find_refs
-        elsif key == :sidebar_img
-          @sidebar_img = value
-          find_sidebar_image
-        elsif key == :num_paragraphs
-          @paras = value
-          find_paragraphs(value)
-        elsif key == :sidebar
-          @sidebar = value
-          find_sidebar
+        case key
+          when:img_list
+            @img_list = value
+            image_list
+          when:header
+            @head = value
+            header(value)
+          when:refs
+            @refs = value
+            find_ref_list
+          when:sidebar_img
+            @sidebar_img = value
+            sidebar_image
+          when:num_paragraphs
+            @paras = value
+            paragraphs(value)
+          when:sidebar
+            @sidebar = value
+            sidebar_image
         end
       end
     end
 
-    def find_paragraphs(paras = 1)
+    def paragraphs(value = 1)
+      @paragraphs ||= find_paragraphs(value)
+    end
+
+    def image_list
+      @image_list ||= find_image_list
+    end
+
+    def header(header)
+      @header ||= find_header(header)
+    end
+
+    def ref_list
+      @ref_list ||= find_ref_list
+    end
+
+    def sidebar_image
+      @sidebar_image ||= find_sidebar_image  
+    end
+
+    private
+
+    def find_paragraphs(paras)
       @paras = paras
       api_contents = Call.call_api(@title, :prop => "extracts")
       para = Text.new(api_contents)
@@ -76,7 +99,7 @@ module Wikiwhat
       @header = head_text.find_header(@head)
     end
 
-    def find_refs
+    def find_ref_list
       api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       f_ref = Text.new(api_contents, prop = 'revisions')
       @ref_list = f_ref.refs
