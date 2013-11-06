@@ -57,6 +57,9 @@ module Wikiwhat
       end
     end
 
+    # Memoized methods for each operation.
+    #
+    # Returns instance variable or runs method.
     def paragraphs(value = 1)
       @paragraphs ||= find_paragraphs(value)
     end
@@ -79,6 +82,9 @@ module Wikiwhat
 
     private
 
+    # Finds the specified number of paragraphs on a page starting at the top.
+    #
+    # Returns an array of strings
     def find_paragraphs(paras)
       @paras = paras
       api_contents = Call.call_api(@title, :prop => "extracts")
@@ -86,12 +92,18 @@ module Wikiwhat
       @paragraphs = para.paragraph(@paras)
     end
 
+    # Finds all the media items on a page.
+    #
+    # Returns a hash with keys 'urls' and 'titles' which point to arrays of strings containg the information.
     def find_image_list
       api_contents = Call.call_api(@title, :img_list => true)
       img_list = Media.new(api_contents, 'pages')
       @image_list = img_list.list_images
     end
 
+    # Find a header.
+    #
+    # Return a String containing all the content under a given header.
     def find_header(head)
       @head = head
       api_contents = Call.call_api(@title, :prop => "extracts")
@@ -99,12 +111,18 @@ module Wikiwhat
       @header = head_text.find_header(@head)
     end
 
+    # Find all the references on a page.
+    #
+    # Return nested arrays.
     def find_ref_list
       api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       f_ref = Text.new(api_contents, prop = 'revisions')
       @ref_list = f_ref.refs
     end
 
+    # Find the sidebar image, if one exists.
+    #
+    # Return a String.
     def find_sidebar_image
       api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       side_img_name = Text.new(api_contents, prop = 'revisions')
