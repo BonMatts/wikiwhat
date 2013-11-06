@@ -3,21 +3,24 @@ require 'bundler/setup'
 require 'rspec'
 require 'spec_helper'
 
+
 require_relative 'testfiles/api_call_contents'
 
+
+
 describe Wikiwhat::Page do
-  describe "#find_paragraphs" do
-    context "When #find_paragraphs is called on a Wikiwhat::Page object" do
+  describe "#paragraphs" do
+    context "When #paragraphs is called on a Wikiwhat::Page object" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
-        pigeon.find_paragraphs
+        pigeon.paragraphs
         expect(Wikiwhat::Call).to have_received(:call_api)
       end
       it "calls #paragraphs on a Wikiwhat::Text instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
         expect_any_instance_of(Wikiwhat::Text).to receive(:paragraph).with(1)
-        pigeon.find_paragraphs
+        pigeon.paragraphs
       end
     end
     context 'When :num_paragraphs is set in the options hash' do
@@ -41,18 +44,18 @@ describe Wikiwhat::Page do
       end
     end
   end
-  describe "#find_image_list" do
-    context "When #find_image_list is called on a Wikiwhat::Page instance" do
+  describe "#image_list" do
+    context "When #image_list is called on a Wikiwhat::Page instance" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_image_list, wikiwhat_page_pigeon_img_url)
-        pigeon.find_image_list
+        pigeon.image_list
         expect(Wikiwhat::Call).to have_received(:call_api).at_least(1).times
       end
       it "calls #list_image on a Wikiwhat::Media instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_image_list)
         expect_any_instance_of(Wikiwhat::Media).to receive(:list_images)
-        pigeon.find_image_list
+        pigeon.image_list
       end
     end
     context "when img_list => true is specified in the options hash" do
@@ -68,47 +71,47 @@ describe Wikiwhat::Page do
       end
     end
   end
-  describe "#find_header" do
+  describe "#header" do
     context "When a header present in the article is specified in the options hash," do
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
         pigeon = Wikiwhat::Page.new("Columba livia", :header => "Description")
         expect(Wikiwhat::Call).to have_received(:call_api)
       end
-      it "calls #find_header on a Wikiwhat::Text instance" do
+      it "calls #header on a Wikiwhat::Text instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
         expect_any_instance_of(Wikiwhat::Text).to receive(:find_header).with("Description")
         pigeon = Wikiwhat::Page.new("Columba livia", :header => "Description")
       end
     end
-    context "When #find_header is called on a Wikiwhat::Page instance with an argument," do
+    context "When #header is called on a Wikiwhat::Page instance with an argument," do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
-        pigeon.find_header("Description")
+        pigeon.header("Description")
         expect(Wikiwhat::Call).to have_received(:call_api)
       end
-      it "calls #find_header on a Wikiwhat::Text instance" do
+      it "calls #header on a Wikiwhat::Text instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
         expect_any_instance_of(Wikiwhat::Text).to receive(:find_header).with("Description")
         pigeon = Wikiwhat::Page.new("Columba livia", :header => "Description")
       end
     end
-    context "When #find_header with no argument is called on a Wikiwhat::Page instance," do
+    context "When #header with no argument is called on a Wikiwhat::Page instance," do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "Raises an exception" do
-        expect { pigeon.find_header }.to raise_error(ArgumentError)
+        expect { pigeon.header }.to raise_error(ArgumentError)
       end
     end
     context "When a header not present in the article is specified in the options hash" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia", :header => "Biography") }
       it "Raises an exception" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_extracts)
-        expect { pigeon.find_header }.to raise_error(Wikiwhat::WikiwhatError)
+        expect { pigeon.header }.to raise_error(Wikiwhat::WikiwhatError)
       end
     end
   end
-  describe "#find_refs" do
+  describe "#ref_list" do
     context "When refs => true is specified in the options hash" do
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions)
@@ -121,17 +124,17 @@ describe Wikiwhat::Page do
         pigeon = Wikiwhat::Page.new("Columba livia", :refs => true)
       end
     end
-    context "When #find_refs is called on a Wikiwhat::Page instance" do
+    context "When #ref_list is called on a Wikiwhat::Page instance" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions)
-        pigeon.find_refs
+        pigeon.ref_list
         expect(Wikiwhat::Call).to have_received(:call_api)
       end
-      it "calls #refs on a Wikiwhat::Text instance" do
+      it "calls #find_ref_list on a Wikiwhat::Text instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions)
         expect_any_instance_of(Wikiwhat::Text).to receive(:refs)
-        pigeon.find_refs
+        pigeon.ref_list
       end
     end
     context "When the page has no references" do
@@ -140,7 +143,7 @@ describe Wikiwhat::Page do
       end
     end
   end
-  describe "#find_sidebar_image" do
+  describe "#sidebar_image" do
     context "When sidebar_img => true is specified in the options hash" do
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions, wikiwhat_page_pigeon_sidebar_image)
@@ -153,24 +156,24 @@ describe Wikiwhat::Page do
         pigeon = Wikiwhat::Page.new("Columba livia", :sidebar_img => true)
       end
     end
-    context "When #find_sidebar_image is called on a Wikiwhat::Page instance" do
+    context "When #sidebar_image is called on a Wikiwhat::Page instance" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions, wikiwhat_page_pigeon_sidebar_image)
-        pigeon.find_sidebar_image
+        pigeon.sidebar_image
         expect(Wikiwhat::Call).to have_received(:call_api).at_least(1).times
       end
       it "calls #sidebar_image on a Wikiwhat::Text instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions, wikiwhat_page_pigeon_sidebar_image)
         expect_any_instance_of(Wikiwhat::Text).to receive(:sidebar_image)
-        pigeon.find_sidebar_image
+        pigeon.sidebar_image
       end
     end
     context "When no sidebar image exists" do
       let(:chad) { Wikiwhat::Page.new("Chad Muska") }
       it "Raises an exception" do
-        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_chad_revisions)
-        expect { chad.find_sidebar_image }.to raise_error(Wikiwhat::WikiwhatError)
+         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_chad_revisions)
+        expect { chad.sidebar_image }.to raise_error(Wikiwhat::WikiwhatError)
       end
     end
   end
