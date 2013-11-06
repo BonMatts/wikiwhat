@@ -108,7 +108,7 @@ module Wikiwhat
     def find_sidebar_image
       api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       side_img_name = Text.new(api_contents, prop = 'revisions')
-      @sidebar_img_url = side_img_name.sidebar_image
+      @sidebar_img = side_img_name.sidebar_image
     end
   end
 end

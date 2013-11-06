@@ -103,8 +103,7 @@ module Wikiwhat
         # Remove the 'image = ' part of the string
         image_name = image_name.split("= ")[1]
         # Call Wikipedia for image url
-        get_url = Wikiwhat::Call.call_api(('File:'+ image_name),
-          :prop => "imageinfo", :iiprop => true)
+        get_url = Wikiwhat::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
         # Pull url from hash
         img_name_2 = pull_from_hash(get_url, "pages")
         img_array = pull_from_hash(img_name_2, "imageinfo")
