@@ -97,9 +97,9 @@ module Wikiwhat
     # Return the image from the sidebar, if one exists
     def sidebar_image
       # Check to see if a sidebar image exists
-      if content_split(0)[/(image\s* =\s*).*?(g|f)/]
+      if content_split(0)[/(image\s* =\s*).*?\w(\.\w\w(g|f))/]
         # Grab the sidebar image title
-        image_name = content_split(0)[/(image\s* =\s*).*?(g|f)/]
+        image_name = content_split(0)[/(image\s* =\s*).*?\w(\.\w\w(g|f))/]
         # Remove the 'image = ' part of the string
         image_name = image_name.split("= ")[1]
         # Call Wikipedia for image url

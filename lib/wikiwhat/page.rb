@@ -74,7 +74,7 @@ module Wikiwhat
     end
 
     def sidebar_image
-      @sidebar_image ||= find_sidebar_image  
+      @sidebar_image ||= find_sidebar_image
     end
 
     private
