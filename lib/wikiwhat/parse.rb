@@ -196,4 +196,20 @@ module Wikiwhat
       return {urls: url_array, titles: image_title_array }
     end
   end
+
+  class Coordinates< Results
+    def initialize(api_return, prop)
+      @request = self.pull_from_hash(api_return, prop)
+    end
+
+    def list_nearby
+      nearby_locations_array = []
+
+      @request.collect do |key, value|
+        nearby_locations_array << value["title"]
+      end
+      nearby_locations_array
+    end
+
+  end
 end
