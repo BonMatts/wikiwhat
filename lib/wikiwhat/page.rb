@@ -17,6 +17,7 @@ module Wikiwhat
     # sidebar_img - True if desired output is the image in the sidebar
     # paragraphs  - the number of paragraphs from the article as an Interger
     #
+
     # TODO
     # sidebar     - True if desired output is the contents of the sidebar.
     #
@@ -47,6 +48,8 @@ module Wikiwhat
             paragraphs(value)
           when:sidebar
             sidebar_image
+          when:geosearch
+            geosearch
         end
       end
     end
@@ -72,6 +75,10 @@ module Wikiwhat
 
     def sidebar_image
       @sidebar_image ||= find_sidebar_image
+    end
+
+    def geosearch_list
+      @geosearch_list ||= find_geosearch_list
     end
 
     private
@@ -121,6 +128,11 @@ module Wikiwhat
       api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       side_img_name = Text.new(api_contents, prop = 'revisions')
       @sidebar_image = side_img_name.sidebar_image
+    end
+
+    def find_geosearch_list(coordinates)
+      api_contents = Call.call_api(@title, :coordinates => "#{coordinates}")
+      
     end
   end
 end
