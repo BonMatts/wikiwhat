@@ -133,9 +133,7 @@ module Wikiwhat
     def find_geosearch_list(coordinates)
       api_contents = Call.call_api(@title, :coordinates => "#{coordinates}")
       @geosearch_list = Coordinates.new(api_contents, 'pages')
-      @geosearch_list.each do |x|
-        content = Call.call_api(x, "extracts")
-        Text.new(content, )
+      @geosearch_list
     end
   end
 end
