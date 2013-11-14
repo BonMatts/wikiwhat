@@ -85,7 +85,7 @@ Example 2:
 
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia")
-pigeon.find_paragraphs
+pigeon.paragraphs
 	
 => ["<p>The <b>Rock Dove</b> (<i>Columba livia</i>) or <b>Rock Pigeon</b> is a member of the bird family Columbidae (doves and pigeons). In common usage, this bird is often simply referred to as the \"pigeon\".</p>"]
 ```
@@ -117,7 +117,7 @@ Example 2:
 
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia")
-pigeon.find_header("Predators")
+pigeon.header("Predators")
 
 => 	"\n<p>With only its flying abilities protecting it from predation, rock pigeons are a favorite almost around the world for a wide range of raptorial birds. In fact, with feral pigeons existing in most every city in the world, they may form the majority of prey for several . . ."
 ```
