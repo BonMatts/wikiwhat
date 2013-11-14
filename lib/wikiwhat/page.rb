@@ -4,7 +4,7 @@ require 'wikiwhat/api_call'
 
 module Wikiwhat
   class Page
-    attr_reader :head, :header, :image_list, :title, :img_list,
+    attr_reader :head, :header, :images, :title, :img_list,
                 :sidebar_img_url, :ref_list, :paragraphs
 
     # Set title of article and type of information requested.
@@ -36,7 +36,7 @@ module Wikiwhat
       hash.each do |key, value|
         case key
           when:img_list
-            image_list
+            images 
           when:header
             header(value)
           when:refs
@@ -58,8 +58,8 @@ module Wikiwhat
       @paragraphs ||= find_paragraphs(value)
     end
 
-    def image_list
-      @image_list ||= find_image_list
+    def images 
+      @images ||= find_images
     end
 
     def header(header)
@@ -89,10 +89,10 @@ module Wikiwhat
     # Finds all the media items on a page.
     #
     # Returns a hash with keys 'urls' and 'titles' which point to arrays of strings containg the information.
-    def find_image_list
+    def find_images
       api_contents = Call.call_api(@title, :img_list => true)
       img_list = Media.new(api_contents, 'pages')
-      @image_list = img_list.list_images
+      @images = img_list.list_images
     end
 
     # Find a header.

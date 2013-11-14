@@ -41,28 +41,28 @@ describe Wikiwhat::Page do
       end
     end
   end
-  describe "#image_list" do
-    context "When #image_list is called on a Wikiwhat::Page instance" do
+  describe "#images" do
+    context "When #images is called on a Wikiwhat::Page instance" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "calls Call.api" do
-        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_image_list, wikiwhat_page_pigeon_img_url)
-        pigeon.image_list
+        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_images, wikiwhat_page_pigeon_img_url)
+        pigeon.images
         expect(Wikiwhat::Call).to have_received(:call_api).at_least(1).times
       end
       it "calls #list_image on a Wikiwhat::Media instance" do
-        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_image_list)
+        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_images)
         expect_any_instance_of(Wikiwhat::Media).to receive(:list_images)
-        pigeon.image_list
+        pigeon.images
       end
     end
     context "when img_list => true is specified in the options hash" do
       it "calls Call.api" do
-        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_image_list, wikiwhat_page_pigeon_img_url)
+        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_images, wikiwhat_page_pigeon_img_url)
         pigeon = Wikiwhat::Page.new("Columba livia", :img_list => true)
         expect(Wikiwhat::Call).to have_received(:call_api).at_least(1).times
       end
       it "calls #paragraphs on a Wikiwhat::Media instance" do
-        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_image_list)
+        Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_images)
         expect_any_instance_of(Wikiwhat::Media).to receive(:list_images)
         pigeon = Wikiwhat::Page.new("Columba livia", :img_list => true)
       end

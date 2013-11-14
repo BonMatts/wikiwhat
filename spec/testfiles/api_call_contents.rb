@@ -99,7 +99,7 @@ def wikiwhat_page_pigeon_find_paragraphs_1
   ["<p>The <b>Rock Dove</b> (<i>Columba livia</i>) or <b>Rock Pigeon</b> is a member of the bird family Columbidae (doves and pigeons). In common usage, this bird is often simply referred to as the \"pigeon\".</p>"]
 end
 
-def wikiwhat_page_pigeon_image_list
+def wikiwhat_page_pigeon_images
   {"query-continue"=>{"images"=>{"gimcontinue"=>"197191|Pigeon_Revivim_2.jpg"}},
     "query"=>
     {"pages"=>
