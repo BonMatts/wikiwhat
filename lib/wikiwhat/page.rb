@@ -40,7 +40,7 @@ module Wikiwhat
           when:header
             header(value)
           when:refs
-            find_ref_list
+            ref_list
           when:sidebar_img
             sidebar_image
           when:num_paragraphs

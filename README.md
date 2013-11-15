@@ -169,7 +169,7 @@ Example 2:
 
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia")
-pigeon.find_image_list
+pigeon.image_list
 
 => {:urls=>
     ["http://upload.wikimedia.org/wikipedia/commons/4/43/Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg",
