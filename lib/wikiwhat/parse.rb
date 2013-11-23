@@ -102,11 +102,12 @@ module Wikiwhat
     # Return the url of the image as a String.
     def sidebar_image
       # Check to see if a sidebar image exists
-      if content_split(0)[/(image).*?(\.\w\w(g|f))/]
+
+      if content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
         # Grab the sidebar image title
-        image_name = content_split(0)[/(image).*?(\.\w\w(g|f))/]
+        image_name = content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
         # Remove the 'image = ' part of the string
-        image_name = image_name.split("= ")[1]
+        image_name = image_name.split("=")[1].strip
         # Call Wikipedia for image url
         get_url = Wikiwhat::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
         # Pull url from hash
