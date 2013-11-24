@@ -22,6 +22,22 @@ module Wikiwhat
       end
       @result
     end
+
+    # Splits the content into side bar and everything else.
+    # This method is for Parsing methods that use the raw markup from the
+    # revisions call.
+    # Specify start as 0 for sidebar content, for everything else specify
+    # 'content_split(1, -1)'
+    #
+    # TODO:split the content from the catagory info
+    def content_split(start, finish=nil)
+      @content = @request.split("'''")
+      if finish == nil
+        @content[start]
+      else
+        @content[start..finish].join
+      end
+    end
   end
 
   # Extract portions of text from Wiki article
@@ -103,9 +119,9 @@ module Wikiwhat
     def sidebar_image
       # Check to see if a sidebar image exists
 
-      if content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
+      if self.content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
         # Grab the sidebar image title
-        image_name = content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
+        image_name = self.content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
         # Remove the 'image = ' part of the string
         image_name = image_name.split("=")[1].strip
         # Call Wikipedia for image url
@@ -133,22 +149,7 @@ module Wikiwhat
       @content.scan(/<ref>(.*?)<\/ref>/)
     end
 
-    private
-    # Splits the content into side bar and everything else.
-    # This method is for Parsing methods that use the raw markup from the
-    # revisions call.
-    # Specify start as 0 for sidebar content, for everything else specify
-    # 'content_split(1, -1)'
-    #
-    # TODO:split the content from the catagory info
-    def content_split(start, finish=nil)
-      @content = @request.split("'''")
-      if finish == nil
-        @content[start]
-      else
-        @content[start..finish].join
-      end
-    end
+
   end
 
   class Media < Results
