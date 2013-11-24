@@ -64,7 +64,7 @@ describe Wikiwhat::Media do
   end
 
   describe '#sidebar_image_thumbnail' do
-    let(:albert) { Wikiwhat::Media.new(rev_output, "revisions")}
+    let(:albert) { Wikiwhat::Media.new(rev_output, "revisions", { :iipropwidth => 200})}
 
     it "returns the URL for a thumbnail version of the sidebar image." do
       Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_parse_albert_thumbnail)
