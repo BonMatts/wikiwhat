@@ -56,5 +56,17 @@ describe Wikiwhat::Call do
         end
       end
     end
+
+    context 'image thumbnail call' do
+      it "uses RestClient to make API call" do
+        VCR.use_cassette('image_thumbnail') do
+          api_output = Wikiwhat::Call.call_api("File:Kelmitchellpic.jpg",
+            prop:"imageinfo", iiprop:true, iiurlwidth:250)
+
+          expect(api_output).to be_a(Hash)
+          expect(api_output).to eq(apispec_img_thumbnail)
+        end
+      end
+    end
   end
 end

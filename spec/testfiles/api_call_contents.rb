@@ -208,3 +208,22 @@ end
 def wikiwhat_parse_albert_thumbnail_url
   "http://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Einstein_1921_by_F_Schmutzer.jpg/152px-Einstein_1921_by_F_Schmutzer.jpg"
 end
+
+def apispec_img_thumbnail
+  {"query-continue"=>
+    { "imageinfo"=>
+        {"iistart"=>"2009-12-05T02:28:03Z"}},
+      "query"=>
+        {"pages"=>
+          {"-1"=>
+            {"ns"=>6,
+              "title"=>"File:Kelmitchellpic.jpg",
+              "missing"=>"",
+              "imagerepository"=>"shared",
+              "imageinfo"=>[
+                {"thumburl"=>"http://upload.wikimedia.org/wikipedia/commons/c/c4/Kelmitchellpic.jpg",
+                  "thumbwidth"=>154,
+                  "thumbheight"=>314,
+                  "url"=>"http://upload.wikimedia.org/wikipedia/commons/c/c4/Kelmitchellpic.jpg",
+                  "descriptionurl"=>"http://commons.wikimedia.org/wiki/File:Kelmitchellpic.jpg"}]}}}}
+end

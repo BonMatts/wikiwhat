@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&iiprop=url&iiurlwidth=250&prop=imageinfo&redirects&titles=File:Kelmitchellpic.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.10-1ubuntu3.8+wmf2
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - private
+      X-Frame-Options:
+      - SAMEORIGIN
+      Vary:
+      - Accept-Encoding,X-Forwarded-Proto
+      X-Vary-Options:
+      - Accept-Encoding;list-contains=gzip,X-Forwarded-Proto,Cookie;string-contains=enwikiToken;string-contains=enwikiLoggedOut;string-contains=forceHTTPS;string-contains=enwikiSession;string-contains=centralauth_Token;string-contains=centralauth_Session;string-contains=centralauth_LoggedOut;string-contains=mf_useformat;string-contains=stopMobileRedirect
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Varnish:
+      - 2362209605, 3154464337
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Content-Length:
+      - '252'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 24 Nov 2013 22:06:54 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Cache:
+      - cp1068 miss (0), cp1052 frontend miss (0)
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA62Qz07DMAzG38Xntmm7DUEegAtXTkMcSmoaQ/4tcTWhqu9O
+        0o0D0riRg+XP+fyz5QVOM8avWnnH5GYEuQDZYUJy734TlHiIDBL6tn2ou75u
+        D89tL/t72e6OsK7VhVC8IfelktRdiS7ndxUwsclceCSD8gmNJVYajQmkmo8w
+        QQWWUiI3ZU8W2/SIwSdiX7iQ9BBx/Pm6LPayAOvZvs3RZIdmDlKIORg/jM2Z
+        PsniSEPj4ySKCkUJ5a31Lgkl1F7cXGRDnmlkDbI77K8FjTTpfIFdlyv/O3DE
+        pCIFJu9+ga+dN8jirzOur2t+33pqU/3QAQAA
+    http_version: 
+  recorded_at: Sun, 24 Nov 2013 22:07:04 GMT
+recorded_with: VCR 2.6.0
