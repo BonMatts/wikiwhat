@@ -156,6 +156,26 @@ def wikiwhat_page_pigeon_sidebar_image
             "http://commons.wikimedia.org/wiki/File:Blue_Rock_Pigeon_(Columba_livia)_in_Kolkata_I_IMG_9762.jpg"}]}}}}
 end
 
+def wikiwhat_page_pigeon_sidebar_thumbnail
+  {"query"=>
+  {"pages"=>
+    {"-1"=>
+      {"ns"=>6,
+       "title"=>
+        "File:Blue Rock Pigeon (Columba livia) in Kolkata I IMG 9762.jpg",
+       "missing"=>"",
+       "imagerepository"=>"shared",
+       "imageinfo"=>
+        [{"thumburl"=>
+           "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg/250px-Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg",
+          "thumbwidth"=>250,
+          "thumbheight"=>265,
+          "url"=>
+           "http://upload.wikimedia.org/wikipedia/commons/4/43/Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg",
+          "descriptionurl"=>
+           "http://commons.wikimedia.org/wiki/File:Blue_Rock_Pigeon_(Columba_livia)_in_Kolkata_I_IMG_9762.jpg"}]}}}}
+end
+
 def wikiwhat_page_chad_revisions
   {"query"=>
   {"pages"=>
