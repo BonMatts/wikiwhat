@@ -154,13 +154,11 @@ module Wikiwhat
 
   class Media < Results
     attr_reader :api_return
-    def initialize(api_return, prop, options={})
+    def initialize(api_return, prop)
       @request = self.pull_from_hash(api_return, prop)
       if @request.class == Array
         @request = self.pull_from_hash(@request[0], "*")
       end
-      options[:sidebarwidth]  ? @sidebarwidth  = options[:sidebarwidth]
-      options[:sidebarheight] ? @sidebarheight = options[:sidebarheight]
     end
 
     # Find all the media items on a page.
@@ -203,10 +201,10 @@ module Wikiwhat
       return {urls: url_array, titles: image_title_array }
     end
 
-        # Find the image from the sidebar, if one exists
+    # Find the image from the sidebar, if one exists
     #
-    # Return the url of the image as a String.
-    def sidebar_image_thumbnail
+    # Return the url of the thumbnail image as a String.
+    def sidebar_image_thumbnail(options={})
       # Check to see if a sidebar image exists
       if self.content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
         # Grab the sidebar image title
@@ -217,8 +215,8 @@ module Wikiwhat
         get_url = Wikiwhat::Call.call_api(('File:'+ image_name), 
           :prop => "imageinfo", 
           :iiprop => true, 
-          :iiurlwidth => @sidebarwidth, 
-          :iiurlheight => @sidebarheight )
+          :iiurlwidth => options[:width], 
+          :iiurlheight => options[:height] )
         # Pull url from hash
         img_name_2 = pull_from_hash(get_url, "pages")
         img_array = pull_from_hash(img_name_2, "imageinfo")
