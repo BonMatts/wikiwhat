@@ -175,36 +175,36 @@ describe Wikiwhat::Page do
     end
   end
     describe "#sidebar_thumbnail" do
-    context "When sidebar_thumb => 250 is specified in the options hash" do
+    context "When sidebar_thumb => {:width => 250} is specified in the options hash" do
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions, wikiwhat_page_pigeon_sidebar_thumbnail)
-        pigeon = Wikiwhat::Page.new("Columba livia", :sidebar_thumb => 250)
+        pigeon = Wikiwhat::Page.new("Columba livia", :sidebar_thumb => {:width => 250})
         expect(Wikiwhat::Call).to have_received(:call_api).at_least(1).times
       end
-      it "calls #sidebar_thumbnail on a Wikiwhat::Media instance" do
+      it "calls #sidebar_image_thumbnail on a Wikiwhat::Media instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions, wikiwhat_page_pigeon_sidebar_thumbnail)
-        expect_any_instance_of(Wikiwhat::Media).to receive(:sidebar_thumbnail)
-        pigeon = Wikiwhat::Page.new("Columba livia", :sidebar_thumb => 250)
+        expect_any_instance_of(Wikiwhat::Media).to receive(:sidebar_image_thumbnail)
+        pigeon = Wikiwhat::Page.new("Columba livia", :sidebar_thumb => {:width => 250})
       end
     end
-    context "When #sidebar_thumbnail is called on a Wikiwhat::Page instance" do
+    context "When #sidebar_thumbnail is called on a Wikiwhat::Media instance" do
       let(:pigeon) { Wikiwhat::Page.new("Columba livia") }
       it "calls Call.api" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions, wikiwhat_page_pigeon_sidebar_thumbnail)
-        pigeon.sidebar_thumbnail
+        pigeon.sidebar_thumbnail(:width => 250)
         expect(Wikiwhat::Call).to have_received(:call_api).at_least(1).times
       end
-      it "calls #sidebar_thumbnail on a Wikiwhat::Media instance" do
+      it "calls #sidebar_image_thumbnail on a Wikiwhat::Media instance" do
         Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_pigeon_revisions, wikiwhat_page_pigeon_sidebar_thumbnail)
-        expect_any_instance_of(Wikiwhat::Media).to receive(:sidebar_thumbnail)
-        pigeon.sidebar_thumbnail
+        expect_any_instance_of(Wikiwhat::Media).to receive(:sidebar_image_thumbnail)
+        pigeon.sidebar_thumbnail(:width => 250)
       end
     end
     context "When no sidebar image exists" do
       let(:chad) { Wikiwhat::Page.new("Chad Muska") }
       it "Raises an exception" do
          Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_page_chad_revisions)
-        expect { chad.sidebar_image }.to raise_error(Wikiwhat::WikiwhatError)
+        expect { chad.sidebar_thumbnail(:width => 250) }.to raise_error(Wikiwhat::WikiwhatError)
       end
     end
   end
