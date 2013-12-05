@@ -164,37 +164,37 @@ module Wikiwhat
       # Call API for initial list of images
       isolated_list = @request
       # Parse JSON object for list of image titles
-      image_title_array = []
+      image_array = []
       isolated_list.collect do |key, value|
-        image_title_array << value["title"]
+        image_array << {"title" => value["title"], "url" => value["fullurl"] }
       end
 
       # Make API call for individual image links
-      img_url_call_array = []
-      image_title_array.each do |title|
-        img_url_call_array << Wikiwhat::Call.call_api(title,
-          :prop => "imageinfo", :iiprop => true)
-      end
+      # img_url_call_array = []
+      # image_title_array.each do |title|
+      #   img_url_call_array << Wikiwhat::Call.call_api(title,
+      #     :prop => "imageinfo", :iiprop => true)
+      # end
 
-      # Pull pages object containing imageinfo array out from JSON object
-      imageinfo_array = []
-      img_url_call_array.each do |object|
-        imageinfo_array << pull_from_hash(object, "pages")
-      end
+      # # Pull pages object containing imageinfo array out from JSON object
+      # imageinfo_array = []
+      # img_url_call_array.each do |object|
+      #   imageinfo_array << pull_from_hash(object, "pages")
+      # end
 
-      # Pull imageinfo array out of nested hash
-      info_array = []
-      imageinfo_array.each do |object|
-        info_array << pull_from_hash(object, "imageinfo")
-      end
+      # # Pull imageinfo array out of nested hash
+      # info_array = []
+      # imageinfo_array.each do |object|
+      #   info_array << pull_from_hash(object, "imageinfo")
+      # end
 
-      # Pull each URL and place in an array
-      url_array = []
-      info_array.each do |array|
-        url_array << array[0]["url"]
-      end
+      # # Pull each URL and place in an array
+      # url_array = []
+      # info_array.each do |array|
+      #   url_array << array[0]["url"]
+      # end
 
-      return {urls: url_array, titles: image_title_array }
+      return image_array
     end
   end
 end
