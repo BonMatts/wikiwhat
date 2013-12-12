@@ -22,7 +22,108 @@ def rev_content
 end
 
 def img_output
-  {"query-continue"=>{"images"=>{"gimcontinue"=>"736|Citizen-Einstein.jpg"}}, "query"=>{"pages"=>{"-1"=>{"ns"=>6, "title"=>"File:1919 eclipse positive.jpg", "missing"=>""}, "-2"=>{"ns"=>6, "title"=>"File:Albert Einstein's exam of maturity grades (color2).jpg", "missing"=>""}, "-3"=>{"ns"=>6, "title"=>"File:Albert Einstein (Nobel).png", "missing"=>""}, "-4"=>{"ns"=>6, "title"=>"File:Albert Einstein Head.jpg", "missing"=>""}, "-5"=>{"ns"=>6, "title"=>"File:Albert Einstein as a child.jpg", "missing"=>""}, "-6"=>{"ns"=>6, "title"=>"File:Albert Einstein at the age of three (1882).jpg", "missing"=>""}, "-7"=>{"ns"=>6, "title"=>"File:Albert Einstein german.ogg", "missing"=>""}, "-8"=>{"ns"=>6, "title"=>"File:Albert Einstein photo 1920.jpg", "missing"=>""}, "-9"=>{"ns"=>6, "title"=>"File:Albert Einstein photo 1921.jpg", "missing"=>""}, "-10"=>{"ns"=>6, "title"=>"File:Albert Einstein signature 1934.svg", "missing"=>""}}}}
+{"query-continue"=>{"images"=>{"gimcontinue"=>"736|Citizen-Einstein.jpg"}},
+ "query"=>
+  {"pages"=>
+    {"-1"=>
+      {"ns"=>6,
+       "title"=>"File:1919 eclipse positive.jpg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:1919_eclipse_positive.jpg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:1919_eclipse_positive.jpg&action=edit"},
+     "-2"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein's exam of maturity grades (color2).jpg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein%27s_exam_of_maturity_grades_(color2).jpg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein%27s_exam_of_maturity_grades_(color2).jpg&action=edit"},
+     "-3"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein (Nobel).png",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein_(Nobel).png",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_(Nobel).png&action=edit"},
+     "-4"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein Head.jpg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>"http://en.wikipedia.org/wiki/File:Albert_Einstein_Head.jpg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_Head.jpg&action=edit"},
+     "-5"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein as a child.jpg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein_as_a_child.jpg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_as_a_child.jpg&action=edit"},
+     "-6"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein at the age of three (1882).jpg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein_at_the_age_of_three_(1882).jpg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_at_the_age_of_three_(1882).jpg&action=edit"},
+     "-7"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein german.ogg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein_german.ogg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_german.ogg&action=edit"},
+     "-8"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein photo 1920.jpg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein_photo_1920.jpg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_photo_1920.jpg&action=edit"},
+     "-9"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein photo 1921.jpg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein_photo_1921.jpg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_photo_1921.jpg&action=edit"},
+     "-10"=>
+      {"ns"=>6,
+       "title"=>"File:Albert Einstein signature 1934.svg",
+       "missing"=>"",
+       "contentmodel"=>"wikitext",
+       "pagelanguage"=>"en",
+       "fullurl"=>
+        "http://en.wikipedia.org/wiki/File:Albert_Einstein_signature_1934.svg",
+       "editurl"=>
+        "http://en.wikipedia.org/w/index.php?title=File:Albert_Einstein_signature_1934.svg&action=edit"}}}}
 end
 
 def img_content
@@ -42,7 +143,29 @@ def refs_content
 end
 
 def list_images_output
-  {:urls=>["http://upload.wikimedia.org/wikipedia/commons/3/37/1919_eclipse_positive.jpg", "http://upload.wikimedia.org/wikipedia/commons/c/c3/Albert_Einstein%27s_exam_of_maturity_grades_%28color2%29.jpg", "http://upload.wikimedia.org/wikipedia/commons/5/50/Albert_Einstein_%28Nobel%29.png", "http://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg", "http://upload.wikimedia.org/wikipedia/commons/a/ad/Albert_Einstein_as_a_child.jpg", "http://upload.wikimedia.org/wikipedia/commons/f/fb/Albert_Einstein_at_the_age_of_three_%281882%29.jpg", "http://upload.wikimedia.org/wikipedia/commons/6/6b/Albert_Einstein_german.ogg", "http://upload.wikimedia.org/wikipedia/commons/1/10/Albert_Einstein_photo_1920.jpg", "http://upload.wikimedia.org/wikipedia/commons/1/11/Albert_Einstein_photo_1921.jpg", "http://upload.wikimedia.org/wikipedia/commons/d/d7/Albert_Einstein_signature_1934.svg"], :titles=>["File:1919 eclipse positive.jpg", "File:Albert Einstein's exam of maturity grades (color2).jpg", "File:Albert Einstein (Nobel).png", "File:Albert Einstein Head.jpg", "File:Albert Einstein as a child.jpg", "File:Albert Einstein at the age of three (1882).jpg", "File:Albert Einstein german.ogg", "File:Albert Einstein photo 1920.jpg", "File:Albert Einstein photo 1921.jpg", "File:Albert Einstein signature 1934.svg"]}
+  [{"title"=>"File:1919 eclipse positive.jpg",
+    "url"=>"http://en.wikipedia.org/wiki/File:1919_eclipse_positive.jpg"},
+   {"title"=>"File:Albert Einstein's exam of maturity grades (color2).jpg",
+    "url"=>
+     "http://en.wikipedia.org/wiki/File:Albert_Einstein%27s_exam_of_maturity_grades_(color2).jpg"},
+   {"title"=>"File:Albert Einstein (Nobel).png",
+    "url"=>"http://en.wikipedia.org/wiki/File:Albert_Einstein_(Nobel).png"},
+   {"title"=>"File:Albert Einstein Head.jpg",
+    "url"=>"http://en.wikipedia.org/wiki/File:Albert_Einstein_Head.jpg"},
+   {"title"=>"File:Albert Einstein as a child.jpg",
+    "url"=>"http://en.wikipedia.org/wiki/File:Albert_Einstein_as_a_child.jpg"},
+   {"title"=>"File:Albert Einstein at the age of three (1882).jpg",
+    "url"=>
+     "http://en.wikipedia.org/wiki/File:Albert_Einstein_at_the_age_of_three_(1882).jpg"},
+   {"title"=>"File:Albert Einstein german.ogg",
+    "url"=>"http://en.wikipedia.org/wiki/File:Albert_Einstein_german.ogg"},
+   {"title"=>"File:Albert Einstein photo 1920.jpg",
+    "url"=>"http://en.wikipedia.org/wiki/File:Albert_Einstein_photo_1920.jpg"},
+   {"title"=>"File:Albert Einstein photo 1921.jpg",
+    "url"=>"http://en.wikipedia.org/wiki/File:Albert_Einstein_photo_1921.jpg"},
+   {"title"=>"File:Albert Einstein signature 1934.svg",
+    "url"=>
+     "http://en.wikipedia.org/wiki/File:Albert_Einstein_signature_1934.svg"}]
 end
 
 def media_list_1

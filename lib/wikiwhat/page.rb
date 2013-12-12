@@ -90,7 +90,7 @@ module Wikiwhat
     #
     # Returns a hash with keys 'urls' and 'titles' which point to arrays of strings containg the information.
     def find_image_list
-      api_contents = Call.call_api(@title, :img_list => true)
+      api_contents = Call.call_api(@title, :img_list => true, :inprop => true, :prop => 'info')
       img_list = Media.new(api_contents, 'pages')
       @image_list = img_list.list_images
     end
