@@ -55,9 +55,7 @@ describe Wikiwhat::Media do
 
     it "pulls out file names and queries the api for their urls, returns an
       array of urls" do
-      Wikiwhat::Call.stub(:call_api).and_return(media_list_1, media_list_2,
-        media_list_3, media_list_4, media_list_5, media_list_6, media_list_7,
-        media_list_8, media_list_9, media_list_10)
+
 
       expect(albert.list_images).to eq(list_images_output)
     end
