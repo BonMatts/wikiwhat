@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&generator=images&redirects&titles=Albert%20Einstien
+    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&generator=images&inprop=url&prop=info&redirects&titles=Albert%20Einstien
     body:
       encoding: US-ASCII
       string: ''
@@ -18,10 +18,10 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Date:
-      - Wed, 30 Oct 2013 02:28:35 GMT
       Server:
       - Apache
+      X-Powered-By:
+      - PHP/5.3.10-1ubuntu3.8+wmf2
       X-Content-Type-Options:
       - nosniff
       Cache-Control:
@@ -30,30 +30,43 @@ http_interactions:
       - SAMEORIGIN
       Vary:
       - Accept-Encoding,X-Forwarded-Proto
+      X-Vary-Options:
+      - Accept-Encoding;list-contains=gzip,X-Forwarded-Proto,Cookie;string-contains=enwikiToken;string-contains=enwikiLoggedOut;string-contains=forceHTTPS;string-contains=enwikiSession;string-contains=centralauth_Token;string-contains=centralauth_Session;string-contains=centralauth_LoggedOut;string-contains=mf_useformat;string-contains=stopMobileRedirect
       Content-Encoding:
       - gzip
-      Content-Length:
-      - '287'
       Content-Type:
       - application/json; charset=utf-8
-      X-Cache:
-      - MISS from cp1001.eqiad.wmnet
-      - MISS from cp1003.eqiad.wmnet
-      X-Cache-Lookup:
-      - MISS from cp1001.eqiad.wmnet:3128
-      - MISS from cp1003.eqiad.wmnet:80
+      X-Varnish:
+      - 1128156410, 1247256599
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Content-Length:
+      - '511'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 12 Dec 2013 23:03:52 GMT
+      Age:
+      - '0'
       Connection:
-      - close
+      - keep-alive
+      X-Cache:
+      - cp1053 miss (0), cp1054 frontend miss (0)
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA5XSUUvDMBAA4L9y5MUO2rK0s2v3JqL45H/IujM9SZOapMM5
-        999NlSFICzEP4SC5745LzuxtRHvKWqM96RHZ7syoFxLdFEnqfw/Ytqw+78nT
-        B+rsgbTzSDp/HSS7XNIfZsoZrskZn3Yd4iplnryajEdSuOMNbwBbRYNDGIwL
-        5hG/pZT15BxpGa6yoGbFknGn9mg9XPu4cYDvogfzAr3woyV/AmnFAR0krVHG
-        Fqv5AmVkAUiezR7VKh/0jLKJVZ5QHOYbuY0lhAMBbUdqAaqiIQ++QwjvNY3N
-        dxYREl7XS6PaxsISbS90buQMUsciQ2e8Ad4U6/lumn9DfB7i61jJkdTT58Kg
-        lZvcHf9qYX0BT7lwQVEDAAA=
+        H4sIAAAAAAAAA82W7W7TMBSGb8WKBHRSm8zt6Jc0IYRA/OIWLC85dQ44tomd
+        0TF279gt2ZIFtmwKhPxI/Pn68SPLynX0tYLyapZq5VBVEG2vIyy4ABtKAou7
+        jmi1WP54hw6/g5q9R2UdoIo/GxHd3EyPMWGOqSfPaHgrX15OI4dOhowPKGFL
+        N3RDIJVoLBCjrc+8hEPSNCrQWlTCD/WVsDgoV+gMpG/5hl/Qwd75nrCK5EpU
+        /ut7QPm2XSVlVYaBuXNmmySg4jDFQIY81qVIQi25RWC/ENg9BD/cPZKToMpg
+        H5vcvDns7Pzh0Jc8dajVeUiOvKzZ/E9q3soLKB2p9b6yBPa8IHpHCu6h0F0R
+        UfIMLJmkWupyfvJvvR35WM33Yr6yLBAyvWM1ITsSsnuEz9b63DU71hc9rZPJ
+        J30B8iQ2ajy1rA0xlL1mbEfQWV9BH4Fnox481iAYTE2d2fHyuq8XbgknaY5y
+        ZDvcMs6aHIM5aid3TC17m3LE5UD8fsPl5vISgEzoej3yhca4Y56L+bRwvRy4
+        WItrOJMPrtQxu+prVkBZcBVrMaLFFsNgxu5SO3bWfe2YXDtN6GZ+Ou45O3Cw
+        BsdgltrJHVObJ5ui/4kp+tdM0d+aoqd9VVkUKvyIgNe1OIvt5Yi6bllYg2Uw
+        Zd30tjb//ARIi6d5UwwAAA==
     http_version: 
-  recorded_at: Wed, 30 Oct 2013 02:28:35 GMT
+  recorded_at: Thu, 12 Dec 2013 23:03:51 GMT
 recorded_with: VCR 2.6.0
