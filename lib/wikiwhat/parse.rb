@@ -22,6 +22,22 @@ module Wikiwhat
       end
       @result
     end
+
+    # Splits the content into side bar and everything else.
+    # This method is for Parsing methods that use the raw markup from the
+    # revisions call.
+    # Specify start as 0 for sidebar content, for everything else specify
+    # 'content_split(1, -1)'
+    #
+    # TODO:split the content from the catagory info
+    def content_split(start, finish=nil)
+      @content = @request.split("'''")
+      if finish == nil
+        @content[start]
+      else
+        @content[start..finish].join
+      end
+    end
   end
 
   # Extract portions of text from Wiki article
@@ -102,14 +118,14 @@ module Wikiwhat
     # Return the url of the image as a String.
     def sidebar_image
       # Check to see if a sidebar image exists
-
-      if content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
+      if self.content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
         # Grab the sidebar image title
-        image_name = content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
+        image_name = self.content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
         # Remove the 'image = ' part of the string
         image_name = image_name.split("=")[1].strip
         # Call Wikipedia for image url
-        get_url = Wikiwhat::Call.call_api(('File:'+ image_name), :prop => "imageinfo", :iiprop => true)
+        get_url = Wikiwhat::Call.call_api(('File:'+ image_name),
+          :prop => "imageinfo", :iiprop => true)
         # Pull url from hash
         img_name_2 = pull_from_hash(get_url, "pages")
         img_array = pull_from_hash(img_name_2, "imageinfo")
@@ -133,28 +149,16 @@ module Wikiwhat
       @content.scan(/<ref>(.*?)<\/ref>/)
     end
 
-    private
-    # Splits the content into side bar and everything else.
-    # This method is for Parsing methods that use the raw markup from the
-    # revisions call.
-    # Specify start as 0 for sidebar content, for everything else specify
-    # 'content_split(1, -1)'
-    #
-    # TODO:split the content from the catagory info
-    def content_split(start, finish=nil)
-      @content = @request.split("'''")
-      if finish == nil
-        @content[start]
-      else
-        @content[start..finish].join
-      end
-    end
+
   end
 
   class Media < Results
     attr_reader :api_return
     def initialize(api_return, prop)
       @request = self.pull_from_hash(api_return, prop)
+      if @request.class == Array
+        @request = self.pull_from_hash(@request[0], "*")
+      end
     end
 
     # Find all the media items on a page.
@@ -196,5 +200,33 @@ module Wikiwhat
 
       return {urls: url_array, titles: image_title_array }
     end
+
+    # Find the image from the sidebar, if one exists
+    #
+    # Return the url of the thumbnail image as a String.
+    def sidebar_image_thumbnail(options={})
+      # Check to see if a sidebar image exists
+      if self.content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
+        # Grab the sidebar image title
+        image_name = self.content_split(0)[/(image).*?(\.\w\w(g|G|f|F))/]
+        # Remove the 'image = ' part of the string
+        image_name = image_name.split("=")[1].strip
+        # Call Wikipedia for image url
+        get_url = Wikiwhat::Call.call_api(('File:'+ image_name), 
+          :prop => "imageinfo", 
+          :iiprop => true, 
+          :iiurlwidth => options[:width], 
+          :iiurlheight => options[:height] )
+        # Pull url from hash
+        img_name_2 = pull_from_hash(get_url, "pages")
+        img_array = pull_from_hash(img_name_2, "imageinfo")
+        img_array[0]["thumburl"]
+      else
+        # If no sidebar image exists, raise error.
+        raise Wikiwhat::WikiwhatError.new("Sorry, it looks like there is no sidebar image
+          on this page.")
+      end
+    end
+
   end
 end

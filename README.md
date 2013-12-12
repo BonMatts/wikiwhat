@@ -31,7 +31,7 @@ Or install it yourself as:
 
 This gem makes use of [Wikipedia](http://wikipedia.com), which is a Creative Commons resource. Please check out the [Wikipedia Copyright](http://en.wikipedia.org/wiki/Wikipedia:Copyrights) page for licensing information.
 
-######To create a new Wikiwhat::Page object:
+#####To create a new Wikiwhat::Page object:
 
 Each article to be queried should be set up as a new Wikiwhat::Page object. Queries are made via the Wikipedia API, which has limited redirect capabilities. Misspelled  or ambiguious titles may return unexpected results.
 
@@ -46,17 +46,18 @@ pigeon = Wikiwhat::Page.new("Columba livia")
 albert = Wikiwhat::Page.new("Albert Einstein")
 ```
 
-######Types of infomation available:
+#####Types of infomation available:
 
-* Paragraph(s) in an article
-* All paragraphs under a specific header
-* A list of all image titles and corresponding URLs found in an article
-* The sidebar image
-* A list of all references found in an article
+* [Paragraph(s) in an article](#to-get-the-first-several-paragraphs-in-an-article)
+* [All paragraphs under a specific header](#to get all the paragraphs under a specific header)
+* [A list of all image titles and corresponding URLs found in an article](#to get a list of all the images on a page, plus their urls)
+* [The sidebar image](#to-get-the-sidebar-image)
+* [The sidebar image as a thumbnail](#to-get-the-sidebar-image-as-a-thumbnail)
+* [A list of all references found in an article](#to-get-a-list-of-all-the-references-on-a-page)
 
 These methods must be done independently. We currently do not support setting multiple options at once in a single new Wikiwhat object. However, the indivudual methods can all be called on the same instance of Wikiwhat::Page.
 
-######To get the first several paragraphs in an article:
+#####To get the first several paragraphs in an article:
 
 ```ruby
 page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>", :paragraphs => NUMBER)
@@ -86,11 +87,11 @@ Example 2:
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia")
 pigeon.find_paragraphs
-	
+
 => ["<p>The <b>Rock Dove</b> (<i>Columba livia</i>) or <b>Rock Pigeon</b> is a member of the bird family Columbidae (doves and pigeons). In common usage, this bird is often simply referred to as the \"pigeon\".</p>"]
 ```
 
-######To get all the paragraphs under a specific header:
+#####To get all the paragraphs under a specific header:
 
 ```ruby
 page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>", :header => "<Header>")
@@ -110,7 +111,7 @@ Example 1:
 
 ```ruby
 pigeon = Wikiwhat::Page.new("Columba livia", :header => "Description")
-	
+
 => "\n\n<p>The adult of the nominate subspecies of the Rock Dove is 29 to 37 cm (11 to 15 in) long with a 62 to 72 cm (24 to 28 in) wingspan. Weight for wild or feral Rock Doves ranges from 238–380 g (8.4–13 oz), though . . ."
 ```
 Example 2:
@@ -122,7 +123,7 @@ pigeon.find_header("Predators")
 => 	"\n<p>With only its flying abilities protecting it from predation, rock pigeons are a favorite almost around the world for a wide range of raptorial birds. In fact, with feral pigeons existing in most every city in the world, they may form the majority of prey for several . . ."
 ```
 
-######To get a list of all the images on a page, plus their URLs:
+#####To get a list of all the images on a page, plus their URLs:
 
 ```ruby
 page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>", :img_list => true)
@@ -179,7 +180,7 @@ pigeon.find_image_list
       ]
 ```
 
-######To get the sidebar image:
+#####To get the sidebar image:
 
 ```ruby
 page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>", :sidebar_img => true)
@@ -193,7 +194,50 @@ page.sidebar_image
 
 This method returns the url of the sidebar image as a String. The url is stored under the instance variable `@sidebar_img`.
 
-######To get a list of all the references on a page:
+#####To get the sidebar image as a thumbnail:
+
+```ruby
+page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>", :sidebar_thumb => { :width => <WIDTH IN PX>} )
+```
+
+or:
+
+```ruby
+page = Wikiwhat::Page.new("<WIKIPEDIA ARTICLE TITLE>", :sidebar_thumb => { :height => <HEIGHT IN PX>} )
+```
+Specify height OR width, not both. The image url that is returned is not always exactly the dimensions specified.
+
+You can also call '.sidebar_thumbnail' directly on your Wikiwhat::Page object.
+
+```ruby
+page.sidebar_thumbnail( :height => <HEIGHT IN PX> )
+page.sidebar_thumbnail( :width => <WIDTH IN PX> )
+```
+
+Example 1:
+
+```ruby
+pigeon = Wikiwhat::Page.new("Columba livia", :sidebar_thumb => { :width => 250 })
+
+=> #<Wikiwhat::Page:0x007fd10c3bdd98
+      @sidebar_thumbnail=
+        "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg/250px-Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg",
+      @title="Columba livia">
+```
+
+Example 2:
+
+```ruby
+pigeon = Wikiwhat::Page.new("Columba livia")
+pigeon.sidebar_thumbnail(:width => 250)
+
+=> #<Wikiwhat::Page:0x007fd10c3bdd98
+      @sidebar_thumbnail=
+        "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg/250px-Blue_Rock_Pigeon_%28Columba_livia%29_in_Kolkata_I_IMG_9762.jpg",
+      @title="Columba livia">
+```
+
+#####To get a list of all the references on a page:
 
 Here there be dragons. This method is a work in progress and only works on some pages.
 

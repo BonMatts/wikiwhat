@@ -50,9 +50,9 @@ describe Wikiwhat::Text do
 end
 
 describe Wikiwhat::Media do
-  let(:albert){Wikiwhat::Media.new(img_output, "pages")}
-
   describe '#list_images' do
+    let(:albert){Wikiwhat::Media.new(img_output, "pages")}
+
     it "pulls out file names and queries the api for their urls, returns an
       array of urls" do
       Wikiwhat::Call.stub(:call_api).and_return(media_list_1, media_list_2,
@@ -60,6 +60,15 @@ describe Wikiwhat::Media do
         media_list_8, media_list_9, media_list_10)
 
       expect(albert.list_images).to eq(list_images_output)
+    end
+  end
+
+  describe '#sidebar_image_thumbnail' do
+    let(:albert) { Wikiwhat::Media.new(rev_output, "revisions", { :iipropwidth => 200})}
+
+    it "returns the URL for a thumbnail version of the sidebar image." do
+      Wikiwhat::Call.stub(:call_api).and_return(wikiwhat_parse_albert_thumbnail)
+      expect(albert.sidebar_image_thumbnail).to eq(wikiwhat_parse_albert_thumbnail_url)
     end
   end
 end
