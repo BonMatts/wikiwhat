@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&generator=images&inprop=url&prop=info&redirects&titles=Albert%20Einstien
+    uri: http://en.wikipedia.org/w/api.php?action=query&format=json&iiprop=url&iiurlwidth=250&prop=imageinfo&redirects&titles=File:Kelmitchellpic.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -37,36 +37,30 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       X-Varnish:
-      - 1128156410, 1247256599
+      - 2362209605, 3154464337
       Via:
       - 1.1 varnish, 1.1 varnish
       Content-Length:
-      - '511'
+      - '252'
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 12 Dec 2013 23:03:52 GMT
+      - Sun, 24 Nov 2013 22:06:54 GMT
       Age:
       - '0'
       Connection:
       - keep-alive
       X-Cache:
-      - cp1053 miss (0), cp1054 frontend miss (0)
+      - cp1068 miss (0), cp1052 frontend miss (0)
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA82W7W7TMBSGb8WKBHRSm8zt6Jc0IYRA/OIWLC85dQ44tomd
-        0TF279gt2ZIFtmwKhPxI/Pn68SPLynX0tYLyapZq5VBVEG2vIyy4ABtKAou7
-        jmi1WP54hw6/g5q9R2UdoIo/GxHd3EyPMWGOqSfPaHgrX15OI4dOhowPKGFL
-        N3RDIJVoLBCjrc+8hEPSNCrQWlTCD/WVsDgoV+gMpG/5hl/Qwd75nrCK5EpU
-        /ut7QPm2XSVlVYaBuXNmmySg4jDFQIY81qVIQi25RWC/ENg9BD/cPZKToMpg
-        H5vcvDns7Pzh0Jc8dajVeUiOvKzZ/E9q3soLKB2p9b6yBPa8IHpHCu6h0F0R
-        UfIMLJmkWupyfvJvvR35WM33Yr6yLBAyvWM1ITsSsnuEz9b63DU71hc9rZPJ
-        J30B8iQ2ajy1rA0xlL1mbEfQWV9BH4Fnox481iAYTE2d2fHyuq8XbgknaY5y
-        ZDvcMs6aHIM5aid3TC17m3LE5UD8fsPl5vISgEzoej3yhca4Y56L+bRwvRy4
-        WItrOJMPrtQxu+prVkBZcBVrMaLFFsNgxu5SO3bWfe2YXDtN6GZ+Ou45O3Cw
-        BsdgltrJHVObJ5ui/4kp+tdM0d+aoqd9VVkUKvyIgNe1OIvt5Yi6bllYg2Uw
-        Zd30tjb//ARIi6d5UwwAAA==
+        H4sIAAAAAAAAA62Qz07DMAzG38Xntmm7DUEegAtXTkMcSmoaQ/4tcTWhqu9O
+        0o0D0riRg+XP+fyz5QVOM8avWnnH5GYEuQDZYUJy734TlHiIDBL6tn2ou75u
+        D89tL/t72e6OsK7VhVC8IfelktRdiS7ndxUwsclceCSD8gmNJVYajQmkmo8w
+        QQWWUiI3ZU8W2/SIwSdiX7iQ9BBx/Pm6LPayAOvZvs3RZIdmDlKIORg/jM2Z
+        PsniSEPj4ySKCkUJ5a31Lgkl1F7cXGRDnmlkDbI77K8FjTTpfIFdlyv/O3DE
+        pCIFJu9+ga+dN8jirzOur2t+33pqU/3QAQAA
     http_version: 
-  recorded_at: Thu, 12 Dec 2013 23:03:51 GMT
+  recorded_at: Sun, 24 Nov 2013 22:07:04 GMT
 recorded_with: VCR 2.6.0

@@ -5,7 +5,7 @@ require 'wikiwhat/api_call'
 module Wikiwhat
   class Page
     attr_reader :head, :header, :image_list, :title, :img_list,
-                :sidebar_img_url, :ref_list, :paragraphs
+                :sidebar_img_url, :ref_list, :paragraphs, :sidebar_thumbnail
 
     # Set title of article and type of information requested.
     #
@@ -25,6 +25,7 @@ module Wikiwhat
     def initialize(title, options={})
       @title = title
       run(options)
+
     end
 
     # Iterates over the options hash.
@@ -47,6 +48,8 @@ module Wikiwhat
             paragraphs(value)
           when:sidebar
             sidebar_image
+          when:sidebar_thumb
+            sidebar_thumbnail(:width => value[:width], :height => value[:height])
         end
       end
     end
@@ -74,6 +77,10 @@ module Wikiwhat
       @sidebar_image ||= find_sidebar_image
     end
 
+    def sidebar_thumbnail(options={})
+      @sidebar_thumbnail ||= find_sidebar_thumbnail(options)
+    end
+
     private
 
     # Finds the specified number of paragraphs on a page starting at the top.
@@ -90,7 +97,7 @@ module Wikiwhat
     #
     # Returns a hash with keys 'urls' and 'titles' which point to arrays of strings containg the information.
     def find_image_list
-      api_contents = Call.call_api(@title, :img_list => true)
+      api_contents = Call.call_api(@title, :img_list => true, :inprop => true, :prop => 'info')
       img_list = Media.new(api_contents, 'pages')
       @image_list = img_list.list_images
     end
@@ -121,6 +128,15 @@ module Wikiwhat
       api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
       side_img_name = Text.new(api_contents, prop = 'revisions')
       @sidebar_image = side_img_name.sidebar_image
+    end
+
+    # Find the sidebar image, if one exists.
+    #
+    # Return a String.
+    def find_sidebar_thumbnail(options = {})
+      api_contents = Call.call_api(@title, :prop => "revisions", :rvprop => true)
+      side_thumb_name = Media.new(api_contents, prop = 'revisions')
+      @sidebar_thumbnail = side_thumb_name.sidebar_image_thumbnail(:width => options[:width], :height => options[:height])
     end
   end
 end

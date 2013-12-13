@@ -37,7 +37,7 @@ describe Wikiwhat::Call do
     context 'image list call' do
       it "forms the call string & uses RestClient to make API call"  do
         VCR.use_cassette('albert') do
-          api_output = Wikiwhat::Call.call_api('Albert Einstien', img_list:true)
+          api_output = Wikiwhat::Call.call_api('Albert Einstien', img_list:true, inprop:true, prop:"info")
 
           expect(api_output).to be_a(Hash)
           expect(api_output).to eq(img_output)
@@ -53,6 +53,18 @@ describe Wikiwhat::Call do
 
           expect(api_output).to be_a(Hash)
           expect(api_output).to eq(img_url_output)
+        end
+      end
+    end
+
+    context 'image thumbnail call' do
+      it "uses RestClient to make API call" do
+        VCR.use_cassette('image_thumbnail') do
+          api_output = Wikiwhat::Call.call_api("File:Kelmitchellpic.jpg",
+            prop:"imageinfo", iiprop:true, iiurlwidth:250)
+
+          expect(api_output).to be_a(Hash)
+          expect(api_output).to eq(apispec_img_thumbnail)
         end
       end
     end

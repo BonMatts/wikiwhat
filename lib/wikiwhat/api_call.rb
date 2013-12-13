@@ -12,8 +12,12 @@ module Wikiwhat
       options[:rvprop] ? rvprop = "&rvprop=content" : rvprop = ''
       options[:img_list] ? img_list = "&generator=images" : img_list = ''
       options[:iiprop] ? iiprop = "&iiprop=url" : iiprop = ''
+      options[:inprop] ? inprop = "&inprop=url" : inprop = ''
+      options[:iiurlwidth] ? iiurlwidth = "&iiurlwidth=#{options[:iiurlwidth]}" : iipropwidth = ''
+      options[:iiurlheight] ? iiurlheight = "&iiurlheight=#{options[:iiurlheight]}" : iipropheight = ''
 
-      JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query#{prop}&titles=#{title}&format=json&redirects#{img_list}#{rvprop}#{iiprop}")
+
+      JSON.parse(RestClient.get "http://en.wikipedia.org/w/api.php?action=query#{prop}&titles=#{title}&format=json&redirects#{img_list}#{rvprop}#{iiprop}#{iiurlwidth}#{iiurlheight}#{inprop}")
     end
   end
 end
